@@ -29,7 +29,7 @@ body {
 .timeline-full-row { 
     display: flex; 
     align-items: stretch; 
-    /* Base border applied to all full rows */
+    /* Base border applied to all full rows - this is the strong separator */
     border-bottom: 1px solid var(--color-border); 
     min-height: 44px; 
 }
@@ -38,27 +38,30 @@ body {
     border-bottom: none; 
 }
 
-/* FIX 1: Solid horizontal line between individual promo rows */
+/* --- Border Fixes --- */
+
+/* Lighter horizontal line between individual promo bars */
 .timeline-promo-row {
-    /* Use a lighter color or opacity of the main border for the internal separator */
     border-bottom: 1px solid rgba(232, 213, 196, 0.7) !important; 
 }
 
-/* Clear the sticky label's bottom border on promo rows to allow the promo row border to stretch */
-.timeline-promo-row .timeline-sticky-label {
-    border-bottom: none !important;
-}
-
-/* FIX 2: Ensure the last promo row in a category group (right before the next label) has NO internal border */
+/* Ensure the last promo row in a category group does NOT have the light internal border */
 .category-group .timeline-promo-row:last-of-type {
     border-bottom: none !important;
 }
 
-/* FIX 3: Ensure the category label itself has the strong border that separates groups */
-/* This border acts as the separator above the next category/competitor */
+/* Ensure the sticky label's bottom border aligns with the row's bottom border for all standard rows */
+.timeline-promo-row .timeline-sticky-label {
+    border-bottom: none !important;
+}
+
+/* This strong border separates the category labels and groups. */
 .timeline-category-label {
     border-bottom: 1px solid var(--color-border) !important; 
 }
+
+/* --- End Border Fixes --- */
+
 
 .timeline-sticky-label { 
     flex: 0 0 200px; 
