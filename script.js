@@ -203,7 +203,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!wrapper) return;
             wrapper.innerHTML = '';
             
-            if (promotions.length === 0) {
+            // Filter promotions BEFORE attempting to create the timeline structure
+            const activePromosThisMonth = promotions.filter(p => {
+                if (!p.startDate || !p.endDate) return false;
+                const promoStart = new Date(p.startDate + 'T00:00:00Z');
+                const promoEnd = new Date(p.endDate + 'T00:00:00Z');
+                const monthStart = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), 1));
+                const monthEnd = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth() + 1, 0, 23, 59, 59));
+                return promoStart <= monthEnd && promoEnd >= monthStart;
+            });
+
+            if (activePromosThisMonth.length === 0) {
                  wrapper.innerHTML = '<div class="text-center py-10 text-gray-500">No active promotions to display for this month.</div>';
                  return;
             }
@@ -257,7 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 parent.appendChild(cellsContainer);
             };
             competitors.forEach(compName => {
-                const competitorPromos = promotions.filter(p => p.competitor === compName);
+                // Now filtering against the already month-active list
+                const competitorPromos = activePromosThisMonth.filter(p => p.competitor === compName);
                 const config = competitorConfig[compName];
                 const competitorHeaderRow = document.createElement('div');
                 competitorHeaderRow.className = 'timeline-full-row timeline-competitor-header';
@@ -298,11 +309,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     promosForCategory.forEach((promo) => {
                         const span = calculatePromotionSpan(promo.startDate, promo.endDate);
                         
-                        // The duration check is technically redundant here since we filtered above, 
-                        // but is kept to ensure consistency for bar drawing logic.
                         if (span.duration > 0) { 
                             const promoRow = document.createElement('div');
-                            // FIX: Added timeline-promo-row class to apply borders via CSS
+                            // Ensure this class is present for CSS styling
                             promoRow.className = 'timeline-full-row timeline-promo-row'; 
                             promoRow.appendChild(document.createElement('div')).className = 'timeline-sticky-label';
                             const promoCells = document.createElement('div');
@@ -449,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             
-            await createTimeline();
+            await createTimeline(activePromosThisMonth);
             renderDashboard(activePromosThisMonth);
             renderPromotionCards(activePromosThisMonth); 
             updateLastUpdatedText();
