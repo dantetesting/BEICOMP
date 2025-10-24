@@ -110,10 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
         async function loadPromotions() {
             let serverPromos = [], scrapedPromos = [];
             
-            // --- FIX 1: Explicitly handle GitHub Pages base path for local file ---
-            // Construct base URL for the repository
             const repoPath = window.location.pathname.split('/').slice(0, 2).join('/');
             const promotionsJsonUrl = `${repoPath}/promotions.json`;
+            const monthStart = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), 1));
+            const monthEnd = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth() + 1, 0));
+            const defaultStartDate = monthStart.toISOString().split('T')[0];
+            const defaultEndDate = monthEnd.toISOString().split('T')[0];
 
             try {
                 const response = await fetch(`${JSONBIN_URL}/latest`, { headers: { 'X-Master-Key': JSONBIN_API_KEY } });
@@ -122,17 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) { console.error("JSONBIN Load Error:", error); showNotification('❌ Network error loading manual data.', 'bg-red-500'); }
             
             try {
-                // Use the constructed URL to fetch the promotions.json file from the repo
                 const response = await fetch(promotionsJsonUrl); 
                 if(response.ok) { 
                     scrapedPromos = await response.json(); 
                     scrapedPromos.forEach(p => {
-                        if (!p.startDate || p.startDate === "") {
-                            const today = new Date();
-                            p.startDate = today.toISOString().split('T')[0];
-                            const futureDate = new Date();
-                            futureDate.setDate(today.getDate() + 14);
-                            p.endDate = futureDate.toISOString().split('T')[0];
+                        if (!p.startDate || p.startDate === "" || !p.endDate || p.endDate === "") {
+                            p.startDate = defaultStartDate;
+                            p.endDate = defaultEndDate;
+                            p.details = (p.details || '').trim() + " [Default Month Duration]";
                         }
                     });
                 } else {
@@ -153,9 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // --- FIX 2: Check if any promotions were loaded ---
             if (uniquePromos.length === 0) {
-                 // Rerender with empty data to clear "Loading Timeline..."
                  promotions = [];
                  await rerenderAll(true);
                  showNotification('❌ No promotion data loaded from any source.', 'bg-red-500');
@@ -206,7 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!wrapper) return;
             wrapper.innerHTML = '';
             
-            // --- FIX 3: Add initial loading state to timeline wrapper ---
             if (promotions.length === 0) {
                  wrapper.innerHTML = '<div class="text-center py-10 text-gray-500">No active promotions to display for this month.</div>';
                  return;
@@ -273,24 +269,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 wrapper.appendChild(competitorHeaderRow);
                 if (competitorPromos.length === 0) return;
                 const groupedByCategory = {};
+                
+                // Group promotions that are active in the current month/view
                 competitorPromos.forEach(p => {
-                    if (!groupedByCategory[p.category]) groupedByCategory[p.category] = [];
-                    groupedByCategory[p.category].push(p);
+                    const span = calculatePromotionSpan(p.startDate, p.endDate);
+                    if (span.duration > 0) {
+                        if (!groupedByCategory[p.category]) groupedByCategory[p.category] = [];
+                        groupedByCategory[p.category].push(p);
+                    }
                 });
+                
                 promoCategories.forEach(catName => {
                     const promosForCategory = groupedByCategory[catName] || [];
-                    if (promosForCategory.length === 0) return;
+                    // FIX: Use the length of promosForCategory (active promotions) for the count
+                    const activeCount = promosForCategory.length; 
+                    
+                    if (activeCount === 0) return;
+                    
                     const categoryGroup = document.createElement('div');
                     categoryGroup.className = 'category-group';
                     const categoryHeaderRow = document.createElement('div');
                     categoryHeaderRow.className = 'timeline-full-row timeline-category-label';
-                    categoryHeaderRow.innerHTML = `<div class="timeline-sticky-label"><span class="icon mr-2"><i class="fa-solid fa-chevron-down"></i></span>${catName} (${promosForCategory.length})</div>`;
+                    // Use activeCount for the label display
+                    categoryHeaderRow.innerHTML = `<div class="timeline-sticky-label"><span class="icon mr-2"><i class="fa-solid fa-chevron-down"></i></span>${catName} (${activeCount})</div>`;
                     renderGridRow(categoryHeaderRow);
                     categoryGroup.appendChild(categoryHeaderRow);
                     wrapper.appendChild(categoryGroup);
+                    
                     promosForCategory.forEach((promo) => {
                         const span = calculatePromotionSpan(promo.startDate, promo.endDate);
-                        if (span.duration > 0) {
+                        // This check is redundant here but kept for safety/logic encapsulation
+                        if (span.duration > 0) { 
                             const promoRow = document.createElement('div');
                             promoRow.className = 'timeline-full-row timeline-promo-row';
                             promoRow.appendChild(document.createElement('div')).className = 'timeline-sticky-label';
@@ -383,7 +392,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!container) return;
             container.innerHTML = '';
             
-            // --- FIX 4: Display message if no cards are available ---
             if (activePromos.length === 0) {
                  container.innerHTML = '<div class="text-center py-5 text-gray-500 w-full">No current promotions to list.</div>';
                  return;
@@ -426,7 +434,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => { notification.style.transform = 'translateX(110%)'; }, 3000);
         };
         
-        // Use a flag to avoid rerender when data is explicitly empty
         const rerenderAll = async (is_empty = false) => {
             let activePromosThisMonth = [];
             if (!is_empty) {
