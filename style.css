@@ -29,33 +29,29 @@ body {
 .timeline-full-row { 
     display: flex; 
     align-items: stretch; 
+    /* Base border applied to all full rows */
     border-bottom: 1px solid var(--color-border); 
     min-height: 44px; 
 }
-/* Ensure the last row of the timeline (the last promotion row) does not have a border */
 .timeline-full-row:last-child { 
+    /* Ensure the very last row in the wrapper has no border */
     border-bottom: none; 
 }
 
-/* FIX: Add a border to the promo rows to separate them visually */
+/* FIX 1: Solid horizontal line between individual promo rows */
 .timeline-promo-row {
-    border-bottom: 1px solid rgba(232, 213, 196, 0.5) !important; /* Use border color with opacity for subtle separation */
+    /* Use a lighter color or opacity of the main border for the internal separator */
+    border-bottom: 1px solid rgba(232, 213, 196, 0.7) !important; 
 }
-
-/* Ensure that the sticky label (left column) of the promo row matches the right column's border */
-.timeline-promo-row .timeline-sticky-label {
-    border-bottom: none !important;
-}
-
-/* Clear the border for the last promo row inside a category group */
+/* Ensure the last promo row in a category group (right before the next label) has NO internal border */
 .category-group .timeline-promo-row:last-of-type {
     border-bottom: none !important;
 }
-
 /* Ensure the category label itself has the strong border that separates groups */
 .timeline-category-label {
     border-bottom: 1px solid var(--color-border) !important; 
 }
+
 
 .timeline-sticky-label { 
     flex: 0 0 200px; 
@@ -70,6 +66,13 @@ body {
     display: flex; 
     align-items: center; 
 }
+/* Ensure the sticky label's bottom border aligns with the row's bottom border for all standard rows */
+.timeline-promo-row .timeline-sticky-label {
+    /* Clear the sticky label's inherited bottom border to let the row's border show across the full width */
+    border-bottom: none !important; 
+}
+
+
 .timeline-cells-container { 
     flex-grow: 1; 
     position: relative; 
