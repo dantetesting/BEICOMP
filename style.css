@@ -35,6 +35,19 @@ body {
 .timeline-full-row:last-child { 
     border-bottom: none; 
 }
+.timeline-promo-row {
+    /* FIX: Add border bottom to separate individual promo rows */
+    border-bottom: 1px dashed rgba(107, 78, 61, 0.1); 
+}
+/* Ensure the category row border is visible and overwrites dashed for neat grouping */
+.timeline-category-label {
+    border-bottom: 1px solid var(--color-border) !important;
+}
+/* Ensure the last promo row before the next category/competitor still has the border of the category group */
+.category-group .timeline-promo-row:last-of-type {
+    border-bottom: 1px solid var(--color-border);
+}
+
 .timeline-sticky-label { 
     flex: 0 0 200px; 
     padding: 8px 12px; 
@@ -106,7 +119,6 @@ body {
     white-space: nowrap; 
     text-overflow: ellipsis; 
 }
-/* FIX: Added missing competitor bar styles */
 .timeline-bar.hartono { background-color: var(--color-comp-1); }
 .timeline-bar.electronic-city { background-color: var(--color-comp-2); }
 .timeline-bar.erablue { background-color: var(--color-comp-3); }
