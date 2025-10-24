@@ -32,20 +32,29 @@ body {
     border-bottom: 1px solid var(--color-border); 
     min-height: 44px; 
 }
+/* Ensure the last row of the timeline (the last promotion row) does not have a border */
 .timeline-full-row:last-child { 
     border-bottom: none; 
 }
+
+/* FIX: Add a border to the promo rows to separate them visually */
 .timeline-promo-row {
-    /* FIX: Add border bottom to separate individual promo rows */
-    border-bottom: 1px dashed rgba(107, 78, 61, 0.1); 
+    border-bottom: 1px solid rgba(232, 213, 196, 0.5) !important; /* Use border color with opacity for subtle separation */
 }
-/* Ensure the category row border is visible and overwrites dashed for neat grouping */
-.timeline-category-label {
-    border-bottom: 1px solid var(--color-border) !important;
+
+/* Ensure that the sticky label (left column) of the promo row matches the right column's border */
+.timeline-promo-row .timeline-sticky-label {
+    border-bottom: none !important;
 }
-/* Ensure the last promo row before the next category/competitor still has the border of the category group */
+
+/* Clear the border for the last promo row inside a category group */
 .category-group .timeline-promo-row:last-of-type {
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: none !important;
+}
+
+/* Ensure the category label itself has the strong border that separates groups */
+.timeline-category-label {
+    border-bottom: 1px solid var(--color-border) !important; 
 }
 
 .timeline-sticky-label { 
