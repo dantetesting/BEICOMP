@@ -8,9 +8,9 @@
     --color-accent: #E67E22; 
     --color-holiday: #A1112C;
     --color-today-highlight: #FFF2E0; 
-    --color-comp-1: #D2691E; 
-    --color-comp-2: #CD853F; 
-    --color-comp-3: #8B4513;
+    --color-comp-1: #D2691E; /* Hartono */
+    --color-comp-2: #CD853F; /* Electronic City */
+    --color-comp-3: #8B4513; /* Erablue */
 }
 body { 
     font-family: 'Inter', sans-serif; 
@@ -106,14 +106,18 @@ body {
     white-space: nowrap; 
     text-overflow: ellipsis; 
 }
+/* FIX: Added missing competitor bar styles */
 .timeline-bar.hartono { background-color: var(--color-comp-1); }
+.timeline-bar.electronic-city { background-color: var(--color-comp-2); }
+.timeline-bar.erablue { background-color: var(--color-comp-3); }
+
 .promo-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-.promo-item { display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border); }
+.promo-item { display: flex; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border); cursor: pointer; }
 .promo-item:last-child { border-bottom: none; }
 .promo-item-icon-container { width: 80px; height: 80px; border-radius: 0.5rem; margin-right: 1rem; flex-shrink: 0; padding: 12px; border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; }
 .promo-item-title { font-weight: 600; margin-bottom: 0.25rem; color: var(--color-text-primary); }
-.promo-item-category { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem; padding: 0.25rem 0.5rem; background-color: #f7f7f9; border-radius: 0.25rem; display: inline-block; }
-.promo-item-description { font-size: 0.875rem; color: var(--text-secondary); }
+.promo-item-category { font-size: 0.75rem; color: var(--color-text-secondary); margin-bottom: 0.5rem; padding: 0.25rem 0.5rem; background-color: #f7f7f9; border-radius: 0.25rem; display: inline-block; }
+.promo-item-description { font-size: 0.875rem; color: var(--color-text-secondary); }
 .timeline-category-label { cursor: pointer; }
 .timeline-category-label:hover { background-color: #f5f1ed; }
 .timeline-category-label .icon { transition: transform 0.2s; }
@@ -121,3 +125,5 @@ body {
 .category-group.collapsed .timeline-promo-row { display: none; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+/* Utility styles for the notification */
+.notification { transition: transform 0.5s ease-out; position: fixed; right: 10px; bottom: 10px; z-index: 1000; transform: translateX(110%); }
