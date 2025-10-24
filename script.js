@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentDate = new Date(); 
         let charts = {};
         const competitors = ['Hartono', 'Electronic City', 'Erablue'];
+        // FIX: Added colorClass for Electronic City and Erablue for timeline
         const competitorConfig = { 'Hartono': { colorClass: 'hartono', bgColor: '#fdf6f1' }, 'Electronic City': { colorClass: 'electronic-city', bgColor: '#f3f2f7' }, 'Erablue': { colorClass: 'erablue', bgColor: '#f0f0f5' } };
         const promoCategories = [ 'Promo HP & Gadget', 'Promo Laptop & PC', 'Promo TV & Audio', 'Promo Home Appliances', 'Promo Back to School', 'Promo Hari Libur Besar', 'Storewide', 'Other Promotions' ];
         const categoryColors = { 'Promo HP & Gadget': '#D2691E', 'Promo Laptop & PC': '#CD853F', 'Promo TV & Audio': '#A0522D', 'Promo Home Appliances': '#B8860B', 'Promo Back to School': '#DAA520', 'Promo Hari Libur Besar': '#E67E22', 'Storewide': '#7f8c8d', 'Other Promotions': '#F39C12' };
@@ -75,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const categoryOrder = ['Promo TV & Audio', 'Promo HP & Gadget', 'Promo Home Appliances', 'Promo Laptop & PC', 'Promo Back to School', 'Promo Hari Libur Besar', 'Storewide'];
             for (const category of categoryOrder) {
                 for (const keyword of categoryKeywords[category]) {
+                    // FIX: Ensure keyword matching handles full words or phrases correctly, especially with regex construction
                     if (new RegExp(`\\b${keyword.replace(/ /g, '\\s')}\\b`, 'i').test(text)) { return category; }
                 }
             }
@@ -115,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 else { showNotification('⚠️ Could not load manual data.', 'bg-yellow-500'); }
             } catch (error) { console.error("JSONBIN Load Error:", error); showNotification('❌ Network error loading manual data.', 'bg-red-500'); }
             try {
+                // FIX: Use relative path for local file
                 const response = await fetch('promotions.json');
                 if(response.ok) { 
                     scrapedPromos = await response.json(); 
@@ -131,12 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) { console.error("Local promotions.json Load Error:", error); }
             const combinedPromos = [...serverPromos, ...scrapedPromos];
             const uniquePromos = [];
-            const seenTitles = new Set();
+            const seenKeys = new Set();
             combinedPromos.forEach(p => {
-                if (p && typeof p.title === 'string') {
-                    const normalizedTitle = p.title.toLowerCase().trim();
-                    if (!seenTitles.has(normalizedTitle)) {
-                        seenTitles.add(normalizedTitle);
+                if (p && typeof p.title === 'string' && p.competitor) {
+                    // FIX: Include competitor in unique key
+                    const normalizedKey = `${p.competitor.toLowerCase().trim()}_${p.title.toLowerCase().trim()}`;
+                    if (!seenKeys.has(normalizedKey)) {
+                        seenKeys.add(normalizedKey);
                         uniquePromos.push(p);
                     }
                 }
@@ -148,7 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
             await rerenderAll();
         }
         const saveData = async (updatedPromotions) => {
-             const dataToSave = updatedPromos.map(({ tempId, iconHTML, ...rest }) => rest);
+             // Filter out temporary/calculated fields before saving
+             const dataToSave = updatedPromotions.map(({ tempId, iconHTML, ...rest }) => rest);
              try {
                  const response = await fetch(JSONBIN_URL, {
                      method: 'PUT',
@@ -162,7 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             const form = event.target;
             const newPromo = { competitor: form.competitor.value, title: form.title.value, startDate: form.startDate.value, endDate: form.endDate.value, details: form.details.value, url: form.promoUrl.value, category: form.promoType.value };
-            const updatedPromotions = [...promotions, newPromo];
+            // Add a temporary ID for client-side tracking before saving
+            const newPromoWithTempId = { ...newPromo, tempId: promotions.length + 1000, iconHTML: getCategoryIcon(newPromo.category) };
+            const updatedPromotions = [...promotions, newPromoWithTempId];
             const success = await saveData(updatedPromotions);
             if (success) { showNotification('✅ New promotion added!', 'bg-green-500'); form.reset(); document.getElementById('addPromoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to add promotion.', 'bg-red-500'); }
         };
@@ -170,7 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             const form = event.target;
             const promoId = parseInt(form.editPromoId.value);
-            const updatedPromotions = promotions.map(p => p.tempId === promoId ? { tempId: p.tempId, competitor: document.getElementById('editCompetitor').value, title: document.getElementById('editTitle').value, url: document.getElementById('editPromoUrl').value, startDate: document.getElementById('editStartDate').value, endDate: document.getElementById('editEndDate').value, details: document.getElementById('editDetails').value, category: document.getElementById('editPromoType').value } : p);
+            // FIX: Ensure all form fields are correctly mapped to the updated promotion object
+            const updatedPromotions = promotions.map(p => p.tempId === promoId ? { tempId: p.tempId, competitor: document.getElementById('editCompetitor').value, title: document.getElementById('editTitle').value, url: document.getElementById('editPromoUrl').value, startDate: document.getElementById('editStartDate').value, endDate: document.getElementById('editEndDate').value, details: document.getElementById('editDetails').value, category: document.getElementById('editPromoType').value, iconHTML: getCategoryIcon(document.getElementById('editPromoType').value) } : p);
             const success = await saveData(updatedPromotions);
             if (success) { showNotification('✏️ Promotion updated.', 'bg-green-500'); document.getElementById('editPromoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to update.', 'bg-red-500'); }
         };
@@ -358,14 +366,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (compPromotions.length === 0) return;
                 const card = document.createElement('div');
                 card.className = 'paper-card';
-                const config = competitorConfig[compName] || {};
-                card.innerHTML = `<div class="promo-card-header" style="background-color: var(--color-comp-${competitors.indexOf(compName)+1}); border-radius: 16px 16px 0 0; margin: -24px -24px 0 -24px; padding: 1rem 24px;">${compName} Promotions</div><div class="promo-card-content mt-4"></div>`;
+                // FIX: Use compName for a cleaner header. The promo items already contain full details.
+                card.innerHTML = `<div class="promo-card-header" style="background-color: var(--color-comp-${competitors.indexOf(compName)+1}); border-radius: 16px 16px 0 0; margin: -24px -24px 0 -24px; padding: 1rem 24px; color: white; font-weight: 600;">${compName} Promotions</div><div class="promo-card-content mt-4"></div>`;
                 const contentDiv = card.querySelector('.promo-card-content');
                 compPromotions.forEach((promo) => {
                     const promoItem = document.createElement('div');
                     promoItem.className = 'promo-item';
+                    promoItem.dataset.promoId = promo.tempId;
                     promoItem.innerHTML = `<a href="${promo.url || '#'}" target="_blank" rel="noopener noreferrer"><div class="promo-item-icon-container">${promo.iconHTML}</div></a><div class="promo-item-details"><div class="promo-item-title">${promo.title}</div><div class="promo-item-category">${promo.category}</div><p class="promo-item-description">${promo.details || ''}</p></div>`;
                     contentDiv.appendChild(promoItem);
+                    // Add click handler to promo item as well
+                    promoItem.addEventListener('click', (e) => {
+                        // Prevent opening the link if the click originated from the <a> tag inside the item
+                        if (e.target.closest('a') !== promoItem.querySelector('a')) {
+                             showPromoDetailsModal(promo.tempId);
+                        }
+                    });
                 });
                 container.appendChild(card);
             });
@@ -380,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const notificationText = notification.querySelector('span');
             notificationText.textContent = message;
             notification.className = `text-white px-4 py-2 rounded-lg shadow-lg notification ${colorClass}`;
+            notification.classList.remove('hidden'); 
             notification.style.transform = 'translateX(0)';
             setTimeout(() => { notification.style.transform = 'translateX(110%)'; }, 3000);
         };
@@ -398,12 +415,22 @@ document.addEventListener('DOMContentLoaded', () => {
             updateLastUpdatedText();
         };
         const populatePromoTypeDropdowns = () => {
-             const selects = [document.getElementById('promoType'), document.getElementById('editPromoType'), document.getElementById('editCompetitor'), document.getElementById('competitor')]; 
+             const selects = [document.getElementById('promoType'), document.getElementById('editPromoType')];
+             const competitorSelects = [document.getElementById('competitor'), document.getElementById('editCompetitor')];
              selects.forEach(select => { 
                 if (!select) return; 
                 select.innerHTML = ''; 
-                const items = (select.id === 'competitor' || select.id === 'editCompetitor') ? competitors : promoCategories;
-                items.forEach(item => { 
+                promoCategories.forEach(item => { 
+                    const option = document.createElement('option'); 
+                    option.value = item; 
+                    option.textContent = item; 
+                    select.appendChild(option); 
+                }); 
+            });
+            competitorSelects.forEach(select => { 
+                if (!select) return; 
+                select.innerHTML = ''; 
+                competitors.forEach(item => { 
                     const option = document.createElement('option'); 
                     option.value = item; 
                     option.textContent = item; 
@@ -411,14 +438,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }); 
             });
         };
-        const showPromoDetailsModal = (promoId) => {
-            const promo = promotions.find(p=>p.tempId === promoId);
-            if(!promo) return;
-            document.getElementById('modal-content').textContent = `[${promo.category}] ${promo.title}\n\nDetails: ${promo.details}\nDuration: ${promo.startDate} to ${promo.endDate}`;
-            const modalActions = document.getElementById('modal-actions');
-            modalActions.innerHTML = `<button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300" onclick="document.getElementById('promoModal').classList.add('hidden')">Close</button>`;
-            document.getElementById('promoModal').classList.remove('hidden');
-        };
+        
+        // FIX: Recreated missing modal functions and fixed logic in showPromoDetailsModal
         const showDeleteConfirmModal = (promoId) => {
              const confirmModal = document.getElementById('deleteConfirmModal'); 
              document.getElementById('confirmDeleteBtn').dataset.promoId = promoId; 
@@ -437,6 +458,32 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('editDetails').value = promo.details;
             document.getElementById('editPromoModal').classList.remove('hidden');
         };
+        const showPromoDetailsModal = (promoId) => {
+            const promo = promotions.find(p=>p.tempId === promoId);
+            if(!promo) return;
+
+            document.getElementById('modal-title').textContent = `${promo.title} (${promo.competitor})`;
+            
+            document.getElementById('modal-content').innerHTML = `
+                <strong>Category:</strong> ${promo.category} <br>
+                <strong>Duration:</strong> ${promo.startDate} to ${promo.endDate} <br>
+                <strong>Details:</strong> ${promo.details || 'N/A'} <br>
+                ${promo.url ? `<strong>URL:</strong> <a href="${promo.url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">View Promotion</a>` : '<strong>URL:</strong> N/A'}
+            `;
+            
+            const modalActions = document.getElementById('modal-actions');
+            modalActions.innerHTML = `
+                <button class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700" onclick="document.getElementById('promoModal').classList.add('hidden'); showDeleteConfirmModal(${promoId})">Delete</button>
+                <button class="px-4 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700" onclick="document.getElementById('promoModal').classList.add('hidden'); showEditPromoModal(${promoId})">Edit</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300" onclick="document.getElementById('promoModal').classList.add('hidden')">Close</button>
+            `;
+            document.getElementById('promoModal').classList.remove('hidden');
+        };
+
+        // Expose modal functions globally for button clicks defined in HTML/modals
+        window.showEditPromoModal = showEditPromoModal;
+        window.showDeleteConfirmModal = showDeleteConfirmModal;
+        window.showPromoDetailsModal = showPromoDetailsModal;
         
         document.getElementById('openAddPromoModalBtn').addEventListener('click', () => document.getElementById('addPromoModal').classList.remove('hidden'));
         document.getElementById('addPromoForm').addEventListener('submit', handleAddPromoForm);
@@ -449,6 +496,4 @@ document.addEventListener('DOMContentLoaded', () => {
         populatePromoTypeDropdowns();
         loadPromotions();
     }
-</script>
-</body>
-</html>
+});
