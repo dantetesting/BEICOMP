@@ -270,10 +270,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (competitorPromos.length === 0) return;
                 const groupedByCategory = {};
                 
-                // Group promotions that are active in the current month/view
+                // Group promotions that are active in the current month/view AND have a drawable duration
                 competitorPromos.forEach(p => {
                     const span = calculatePromotionSpan(p.startDate, p.endDate);
-                    if (span.duration > 0) {
+                    if (span.duration > 0) { // Only count if drawable
                         if (!groupedByCategory[p.category]) groupedByCategory[p.category] = [];
                         groupedByCategory[p.category].push(p);
                     }
@@ -281,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 promoCategories.forEach(catName => {
                     const promosForCategory = groupedByCategory[catName] || [];
-                    // FIX: Use the length of promosForCategory (active promotions) for the count
                     const activeCount = promosForCategory.length; 
                     
                     if (activeCount === 0) return;
@@ -298,10 +297,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     promosForCategory.forEach((promo) => {
                         const span = calculatePromotionSpan(promo.startDate, promo.endDate);
-                        // This check is redundant here but kept for safety/logic encapsulation
+                        
+                        // The duration check is technically redundant here since we filtered above, 
+                        // but is kept to ensure consistency for bar drawing logic.
                         if (span.duration > 0) { 
                             const promoRow = document.createElement('div');
-                            promoRow.className = 'timeline-full-row timeline-promo-row';
+                            // FIX: Added timeline-promo-row class to apply borders via CSS
+                            promoRow.className = 'timeline-full-row timeline-promo-row'; 
                             promoRow.appendChild(document.createElement('div')).className = 'timeline-sticky-label';
                             const promoCells = document.createElement('div');
                             promoCells.className = 'timeline-cells-container';
