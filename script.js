@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentDate = new Date(); 
         let charts = {};
         const competitors = ['Hartono', 'Electronic City', 'Erablue'];
-        // FIX: Added colorClass for Electronic City and Erablue for timeline
         const competitorConfig = { 'Hartono': { colorClass: 'hartono', bgColor: '#fdf6f1' }, 'Electronic City': { colorClass: 'electronic-city', bgColor: '#f3f2f7' }, 'Erablue': { colorClass: 'erablue', bgColor: '#f0f0f5' } };
         const promoCategories = [ 'Promo HP & Gadget', 'Promo Laptop & PC', 'Promo TV & Audio', 'Promo Home Appliances', 'Promo Back to School', 'Promo Hari Libur Besar', 'Storewide', 'Other Promotions' ];
         const categoryColors = { 'Promo HP & Gadget': '#D2691E', 'Promo Laptop & PC': '#CD853F', 'Promo TV & Audio': '#A0522D', 'Promo Home Appliances': '#B8860B', 'Promo Back to School': '#DAA520', 'Promo Hari Libur Besar': '#E67E22', 'Storewide': '#7f8c8d', 'Other Promotions': '#F39C12' };
@@ -76,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const categoryOrder = ['Promo TV & Audio', 'Promo HP & Gadget', 'Promo Home Appliances', 'Promo Laptop & PC', 'Promo Back to School', 'Promo Hari Libur Besar', 'Storewide'];
             for (const category of categoryOrder) {
                 for (const keyword of categoryKeywords[category]) {
-                    // FIX: Ensure keyword matching handles full words or phrases correctly, especially with regex construction
                     if (new RegExp(`\\b${keyword.replace(/ /g, '\\s')}\\b`, 'i').test(text)) { return category; }
                 }
             }
@@ -111,14 +109,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         async function loadPromotions() {
             let serverPromos = [], scrapedPromos = [];
+            
+            // --- FIX 1: Explicitly handle GitHub Pages base path for local file ---
+            // Construct base URL for the repository
+            const repoPath = window.location.pathname.split('/').slice(0, 2).join('/');
+            const promotionsJsonUrl = `${repoPath}/promotions.json`;
+
             try {
                 const response = await fetch(`${JSONBIN_URL}/latest`, { headers: { 'X-Master-Key': JSONBIN_API_KEY } });
                 if (response.ok) { serverPromos = (await response.json()).record || []; } 
-                else { showNotification('⚠️ Could not load manual data.', 'bg-yellow-500'); }
+                else { showNotification('⚠️ Could not load manual data from JSONBin.', 'bg-yellow-500'); }
             } catch (error) { console.error("JSONBIN Load Error:", error); showNotification('❌ Network error loading manual data.', 'bg-red-500'); }
+            
             try {
-                // FIX: Use relative path for local file
-                const response = await fetch('promotions.json');
+                // Use the constructed URL to fetch the promotions.json file from the repo
+                const response = await fetch(promotionsJsonUrl); 
                 if(response.ok) { 
                     scrapedPromos = await response.json(); 
                     scrapedPromos.forEach(p => {
@@ -130,14 +135,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             p.endDate = futureDate.toISOString().split('T')[0];
                         }
                     });
+                } else {
+                     showNotification(`⚠️ Could not load promotions.json from repository. Status: ${response.status}`, 'bg-yellow-500'); 
                 }
             } catch (error) { console.error("Local promotions.json Load Error:", error); }
+            
             const combinedPromos = [...serverPromos, ...scrapedPromos];
             const uniquePromos = [];
             const seenKeys = new Set();
             combinedPromos.forEach(p => {
                 if (p && typeof p.title === 'string' && p.competitor) {
-                    // FIX: Include competitor in unique key
                     const normalizedKey = `${p.competitor.toLowerCase().trim()}_${p.title.toLowerCase().trim()}`;
                     if (!seenKeys.has(normalizedKey)) {
                         seenKeys.add(normalizedKey);
@@ -145,6 +152,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
+
+            // --- FIX 2: Check if any promotions were loaded ---
+            if (uniquePromos.length === 0) {
+                 // Rerender with empty data to clear "Loading Timeline..."
+                 promotions = [];
+                 await rerenderAll(true);
+                 showNotification('❌ No promotion data loaded from any source.', 'bg-red-500');
+                 return;
+            }
+            
             promotions = uniquePromos.map((p, index) => {
                 const category = p.category || getPromoCategory(p);
                 return { ...p, tempId: index, category: category, iconHTML: getCategoryIcon(category) };
@@ -152,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
             await rerenderAll();
         }
         const saveData = async (updatedPromotions) => {
-             // Filter out temporary/calculated fields before saving
              const dataToSave = updatedPromotions.map(({ tempId, iconHTML, ...rest }) => rest);
              try {
                  const response = await fetch(JSONBIN_URL, {
@@ -167,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             const form = event.target;
             const newPromo = { competitor: form.competitor.value, title: form.title.value, startDate: form.startDate.value, endDate: form.endDate.value, details: form.details.value, url: form.promoUrl.value, category: form.promoType.value };
-            // Add a temporary ID for client-side tracking before saving
             const newPromoWithTempId = { ...newPromo, tempId: promotions.length + 1000, iconHTML: getCategoryIcon(newPromo.category) };
             const updatedPromotions = [...promotions, newPromoWithTempId];
             const success = await saveData(updatedPromotions);
@@ -177,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             const form = event.target;
             const promoId = parseInt(form.editPromoId.value);
-            // FIX: Ensure all form fields are correctly mapped to the updated promotion object
             const updatedPromotions = promotions.map(p => p.tempId === promoId ? { tempId: p.tempId, competitor: document.getElementById('editCompetitor').value, title: document.getElementById('editTitle').value, url: document.getElementById('editPromoUrl').value, startDate: document.getElementById('editStartDate').value, endDate: document.getElementById('editEndDate').value, details: document.getElementById('editDetails').value, category: document.getElementById('editPromoType').value, iconHTML: getCategoryIcon(document.getElementById('editPromoType').value) } : p);
             const success = await saveData(updatedPromotions);
             if (success) { showNotification('✏️ Promotion updated.', 'bg-green-500'); document.getElementById('editPromoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to update.', 'bg-red-500'); }
@@ -191,6 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const wrapper = document.getElementById('timeline-wrapper');
             if (!wrapper) return;
             wrapper.innerHTML = '';
+            
+            // --- FIX 3: Add initial loading state to timeline wrapper ---
+            if (promotions.length === 0) {
+                 wrapper.innerHTML = '<div class="text-center py-10 text-gray-500">No active promotions to display for this month.</div>';
+                 return;
+            }
+            
             const year = currentDate.getUTCFullYear();
             const monthName = currentDate.toLocaleString('default', { month: 'long', timeZone: 'UTC' });
             document.getElementById('timeline-title').textContent = `${monthName} ${year} - Detailed Promotions by Competitor`;
@@ -361,12 +382,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('promo-cards-container');
             if (!container) return;
             container.innerHTML = '';
+            
+            // --- FIX 4: Display message if no cards are available ---
+            if (activePromos.length === 0) {
+                 container.innerHTML = '<div class="text-center py-5 text-gray-500 w-full">No current promotions to list.</div>';
+                 return;
+            }
+            
             competitors.forEach(compName => {
                 const compPromotions = activePromos.filter(p => p.competitor === compName);
                 if (compPromotions.length === 0) return;
                 const card = document.createElement('div');
                 card.className = 'paper-card';
-                // FIX: Use compName for a cleaner header. The promo items already contain full details.
                 card.innerHTML = `<div class="promo-card-header" style="background-color: var(--color-comp-${competitors.indexOf(compName)+1}); border-radius: 16px 16px 0 0; margin: -24px -24px 0 -24px; padding: 1rem 24px; color: white; font-weight: 600;">${compName} Promotions</div><div class="promo-card-content mt-4"></div>`;
                 const contentDiv = card.querySelector('.promo-card-content');
                 compPromotions.forEach((promo) => {
@@ -375,9 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     promoItem.dataset.promoId = promo.tempId;
                     promoItem.innerHTML = `<a href="${promo.url || '#'}" target="_blank" rel="noopener noreferrer"><div class="promo-item-icon-container">${promo.iconHTML}</div></a><div class="promo-item-details"><div class="promo-item-title">${promo.title}</div><div class="promo-item-category">${promo.category}</div><p class="promo-item-description">${promo.details || ''}</p></div>`;
                     contentDiv.appendChild(promoItem);
-                    // Add click handler to promo item as well
                     promoItem.addEventListener('click', (e) => {
-                        // Prevent opening the link if the click originated from the <a> tag inside the item
                         if (e.target.closest('a') !== promoItem.querySelector('a')) {
                              showPromoDetailsModal(promo.tempId);
                         }
@@ -400,15 +425,21 @@ document.addEventListener('DOMContentLoaded', () => {
             notification.style.transform = 'translateX(0)';
             setTimeout(() => { notification.style.transform = 'translateX(110%)'; }, 3000);
         };
-        const rerenderAll = async () => {
-            const activePromosThisMonth = promotions.filter(p => {
-                if (!p.startDate || !p.endDate) return false;
-                const promoStart = new Date(p.startDate + 'T00:00:00Z');
-                const promoEnd = new Date(p.endDate + 'T00:00:00Z');
-                const monthStart = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), 1));
-                const monthEnd = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth() + 1, 0, 23, 59, 59));
-                return promoStart <= monthEnd && promoEnd >= monthStart;
-            });
+        
+        // Use a flag to avoid rerender when data is explicitly empty
+        const rerenderAll = async (is_empty = false) => {
+            let activePromosThisMonth = [];
+            if (!is_empty) {
+                activePromosThisMonth = promotions.filter(p => {
+                    if (!p.startDate || !p.endDate) return false;
+                    const promoStart = new Date(p.startDate + 'T00:00:00Z');
+                    const promoEnd = new Date(p.endDate + 'T00:00:00Z');
+                    const monthStart = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), 1));
+                    const monthEnd = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth() + 1, 0, 23, 59, 59));
+                    return promoStart <= monthEnd && promoEnd >= monthStart;
+                });
+            }
+            
             await createTimeline();
             renderDashboard(activePromosThisMonth);
             renderPromotionCards(activePromosThisMonth); 
@@ -439,7 +470,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
         
-        // FIX: Recreated missing modal functions and fixed logic in showPromoDetailsModal
         const showDeleteConfirmModal = (promoId) => {
              const confirmModal = document.getElementById('deleteConfirmModal'); 
              document.getElementById('confirmDeleteBtn').dataset.promoId = promoId; 
@@ -480,7 +510,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('promoModal').classList.remove('hidden');
         };
 
-        // Expose modal functions globally for button clicks defined in HTML/modals
         window.showEditPromoModal = showEditPromoModal;
         window.showDeleteConfirmModal = showDeleteConfirmModal;
         window.showPromoDetailsModal = showPromoDetailsModal;
