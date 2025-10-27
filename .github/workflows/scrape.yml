@@ -9,6 +9,10 @@ on:
 
 jobs:
   scrape_and_commit:
+    # FIX: Add permissions block to allow the GITHUB_TOKEN to commit changes
+    permissions:
+      contents: write 
+    
     # Using the latest high-availability runner
     runs-on: ubuntu-latest 
     
