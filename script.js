@@ -118,14 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const defaultEndDate = monthEnd.toISOString().split('T')[0];
 
             try {
-                const response = await fetch(`${JSONBIN_URL}/latest`, { headers: { 'X-Master-Key': JSONBIN_API_KEY } });
+                // FIX: Added 'no-cache' header to ensure we get the absolute latest data after GitHub Actions commits
+                const response = await fetch(`${JSONBIN_URL}/latest`, { headers: { 'X-Master-Key': JSONBIN_API_KEY, 'Cache-Control': 'no-cache' } });
                 if (response.ok) { serverPromos = (await response.json()).record || []; } 
-                else { showNotification('⚠️ Could not load manual data from JSONBin.', 'bg-yellow-500'); }
-            } catch (error) { console.error("JSONBIN Load Error:", error); showNotification('❌ Network error loading manual data.', 'bg-red-500'); }
+                else { showNotification('⚠️ Could not load manual data from JSONBin. Retrying on next load.', 'bg-yellow-500'); }
+            } catch (error) { console.error("JSONBIN Load Error:", error); showNotification('❌ Network error loading manual data. Check console.', 'bg-red-500'); }
             
             try {
-                // FIX: Use the URL constructed from repoPath to get the latest committed JSON data
-                const response = await fetch(promotionsJsonUrl); 
+                // FIX: Added 'no-cache' header to ensure we get the absolute latest data after GitHub Actions commits
+                const response = await fetch(promotionsJsonUrl, { headers: { 'Cache-Control': 'no-cache' } }); 
                 if(response.ok) { 
                     scrapedPromos = await response.json(); 
                     scrapedPromos.forEach(p => {
@@ -156,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (uniquePromos.length === 0) {
                  promotions = [];
                  await rerenderAll(true);
-                 // No notification here, let rerenderAll handle empty state messages
+                 // We rely on rerenderAll to display the "No active promotions" message
                  return;
             }
             
@@ -174,8 +175,16 @@ document.addEventListener('DOMContentLoaded', () => {
                      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_API_KEY },
                      body: JSON.stringify(dataToSave)
                  });
-                 return response.ok;
-             } catch (error) { console.error("Save Data Error:", error); return false; }
+                 // FIX: Check for successful status codes (200, 201)
+                 if (response.ok) {
+                     return true;
+                 } else {
+                     console.error("JSONBIN Save Failed. Status:", response.status);
+                     const errorText = await response.text();
+                     console.error("JSONBIN Save Error Text:", errorText);
+                     return false;
+                 }
+             } catch (error) { console.error("Save Data Network Error:", error); return false; }
         };
         const handleAddPromoForm = async (event) => {
             event.preventDefault();
@@ -184,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newPromoWithTempId = { ...newPromo, tempId: promotions.length + 1000, iconHTML: getCategoryIcon(newPromo.category) };
             const updatedPromotions = [...promotions, newPromoWithTempId];
             const success = await saveData(updatedPromotions);
-            if (success) { showNotification('✅ New promotion added!', 'bg-green-500'); form.reset(); document.getElementById('addPromoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to add promotion.', 'bg-red-500'); }
+            if (success) { showNotification('✅ New promotion added!', 'bg-green-500'); form.reset(); document.getElementById('addPromoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to add promotion. Check API Key or permissions.', 'bg-red-500'); }
         };
         const handleEditPromoForm = async (event) => {
             event.preventDefault();
@@ -192,12 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const promoId = parseInt(form.editPromoId.value);
             const updatedPromotions = promotions.map(p => p.tempId === promoId ? { tempId: p.tempId, competitor: document.getElementById('editCompetitor').value, title: document.getElementById('editTitle').value, url: document.getElementById('editPromoUrl').value, startDate: document.getElementById('editStartDate').value, endDate: document.getElementById('editEndDate').value, details: document.getElementById('editDetails').value, category: document.getElementById('editPromoType').value, iconHTML: getCategoryIcon(document.getElementById('editPromoType').value) } : p);
             const success = await saveData(updatedPromotions);
-            if (success) { showNotification('✏️ Promotion updated.', 'bg-green-500'); document.getElementById('editPromoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to update.', 'bg-red-500'); }
+            if (success) { showNotification('✏️ Promotion updated.', 'bg-green-500'); document.getElementById('editPromoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to update. Check API Key or permissions.', 'bg-red-500'); }
         };
         const deletePromotion = async (promoId) => {
             const updatedPromotions = promotions.filter(p => p.tempId !== promoId);
             const success = await saveData(updatedPromotions);
-            if (success) { showNotification('🗑️ Promotion deleted.', 'bg-blue-500'); document.getElementById('deleteConfirmModal').classList.add('hidden'); document.getElementById('promoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to delete.', 'bg-red-500'); }
+            if (success) { showNotification('🗑️ Promotion deleted.', 'bg-blue-500'); document.getElementById('deleteConfirmModal').classList.add('hidden'); document.getElementById('promoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to delete. Check API Key or permissions.', 'bg-red-500'); }
         };
         const createTimeline = async (activePromosThisMonth) => {
             const wrapper = document.getElementById('timeline-wrapper');
