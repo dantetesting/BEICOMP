@@ -1,0 +1,50 @@
+name: Daily Data Scrape and Commit
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run once a day at midnight UTC (adjust if needed)
+    - cron: '0 0 * * *' 
+
+jobs:
+  scrape_and_commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+        with:
+          # Required to allow GitHub Actions to push changes back to the repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x' 
+
+      - name: Install dependencies
+        run: |
+          # Install Python dependencies needed for your scraper
+          pip install selenium undetected-chromedriver beautifulsoup4
+          
+      - name: Install Chrome/Chromedriver dependencies (for Selenium)
+        run: |
+          sudo apt-get update
+          # Install necessary libraries for headless Chrome operations
+          sudo apt-get install -y libnss3 libasound2 libatk-bridge2.0-0 libpangocairo-1.0-0 libgbm-dev
+      
+      - name: Run Scraper Script
+        run: |
+          # Execute the script to generate the updated promotions.json
+          python scraper.py
+        env:
+          # Optional: Add environmental variables here if your scraper needs them
+          PYTHONIOENCODING: utf-8 
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # Commit the new promotions.json file only if it has changed
+          commit_message: '🤖 Automated: Update promotions.json with daily scrape'
+          file_pattern: 'promotions.json'
+          branch: main
