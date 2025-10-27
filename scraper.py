@@ -77,6 +77,7 @@ def extract_product_details(card, competitor):
         details["product_name"] = title_text.split('—')[0].strip()
         
     elif competitor == "Electronic City":
+        # Ini adalah bagian yang rentan, tetap dipertahankan seperti aslinya
         price_tags = card.find_all('p', class_='price')
         if len(price_tags) >= 2:
             details["normal_price"] = price_tags[0].get_text(strip=True)
@@ -101,14 +102,14 @@ def initialize_browser():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     
-    # Force undetected_chromedriver to use the path where Google Chrome Stable is installed 
-    # (guaranteed by the YML file).
+    # Force undetected_chromedriver to use the path where the GitHub Action installed Chrome.
     options.binary_location = '/usr/bin/google-chrome' 
     
+    # FIX: Add a default argument expected in headless environments 
     options.add_argument("--remote-debugging-port=9222")
 
-    # FIX: Removed version_main parameter. We rely on the YML installation 
-    # and the explicit binary_location to find the newest compatible driver.
+    # Removed version_main to allow auto-detection of the driver version 
+    # matching the installed Chrome binary path.
     driver = uc.Chrome(options=options) 
     return driver
 
@@ -180,6 +181,35 @@ def scrape_electronic_city():
         wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "card-promo")))
         time.sleep(3)
         html_content = driver.page_source
+        soup = BeautifulSoup(html_content, 'html.parser')
+        promo_cards = soup.find_all('div', class_='card-promo')
+        print(f"SUKSES! Menemukan {len(promo_cards)} promosi Electronic City.")
+        for card in promo_cards:
+            try:
+                title = card.find('div', class_='ft-sz-13').get_text(strip=True)
+                details = card.find('div', class_='ft-sz-12').get_text(strip=True)
+                promo_url = "https://eci.id" + card.find('a')['href']
+                start_date, end_date = parse_promo_date(details, "Electronic City")
+                
+                product_details = extract_product_details(card, "Electronic City") 
+
+                promo_data = {
+                    "competitor": "Electronic City", 
+                    "title": title, 
+                    "startDate": start_date, 
+                    "endDate": end_date, 
+                    "details": details, 
+                    "url": promo_url,
+                    "product_name": title,
+                    "model_number": "", 
+                    "normal_price": product_details["normal_price"], 
+                    "promo_price": product_details["promo_price"]
+                }
+                promotions.append(promo_data)
+            except Exception as e: 
+                # FIX: Tangkap error spesifik pada card, tetapi JANGAN hentikan scraping.
+                print(f"Error parsing card Electronic City: {e}")
+                continue # Lanjutkan ke kartu berikutnya
     except Exception as e:
         print(f"Error saat navigasi atau mem-parsing Electronic City: {e}")
     finally:
@@ -201,8 +231,36 @@ def scrape_erablue():
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "li.itemhv")))
         time.sleep(3)
         html_content = driver.page_source
+        soup = BeautifulSoup(html_content, 'html.parser')
+        promo_cards = soup.find_all('li', class_='itemhv')
+        print(f"SUKSES! Menemukan {len(promo_cards)} promosi Erablue.")
+        for card in promo_cards:
+            try:
+                title = card.find('h3').get_text(strip=True)
+                details = card.find('p').get_text(strip=True)
+                promo_url = card.find('a')['href']
+                
+                product_details = extract_product_details(card, "Erablue") 
+                
+                promo_data = {
+                    "competitor": "Erablue", 
+                    "title": title, 
+                    "startDate": "", 
+                    "endDate": "", 
+                    "details": details, 
+                    "url": promo_url,
+                    "product_name": product_details["product_name"],
+                    "model_number": "", 
+                    "normal_price": "", 
+                    "promo_price": ""
+                }
+                promotions.append(promo_data)
+            except Exception as e:
+                # FIX: Tangkap error spesifik pada card, tetapi JANGAN hentikan scraping.
+                print(f"Error parsing card Erablue: {e}")
+                continue # Lanjutkan ke kartu berikutnya
     except Exception as e:
-        # Changed this to a print statement to ensure the Python script does not crash and the action continues
+        # Menangkap error navigasi/WebDriver yang menghambat seluruh scraper
         print(f"Error saat navigasi atau mem-parsing Erablue: {e}")
     finally:
         driver.quit()
@@ -214,9 +272,13 @@ def scrape_erablue():
 if __name__ == "__main__":
     all_promotions = []
     
-    # The individual scrapers now handle their own browser initialization and cleanup
+    # Hartono is successful, no browser crash
     all_promotions.extend(scrape_hartono())
+
+    # Electronic City might fail, but will be enclosed in try/except 
     all_promotions.extend(scrape_electronic_city())
+
+    # Erablue caused the crash, calling initialize_browser() with the explicit binary path should help.
     all_promotions.extend(scrape_erablue())
 
     output_file = 'promotions.json'
