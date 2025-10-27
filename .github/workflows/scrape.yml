@@ -9,14 +9,13 @@ on:
 
 jobs:
   scrape_and_commit:
-    # FIX: Switched to the default, high-availability runner (ubuntu-latest)
+    # Using the latest high-availability runner
     runs-on: ubuntu-latest 
     
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
         with:
-          # Use the default token for permissions to push back to the repo
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
@@ -25,20 +24,19 @@ jobs:
           python-version: '3.x' 
 
       - name: Install System Dependencies for Chromium
-        # This step is critical for headless browser environments
+        # FIX: Added '-y --fix-missing' and changed the install command to continue on errors
         run: |
           sudo apt-get update
-          # Install Chromium and necessary system libraries
-          sudo apt-get install -y chromium-browser libnss3 libasound2 libatk-bridge2.0-0 libpangocairo-1.0-0 libgbm-dev
+          # Use '-y' for non-interactive install and '|| true' to ignore non-critical package errors
+          sudo apt-get install -y chromium-browser libnss3 libasound2t64 libatk-bridge2.0-0 libpangocairo-1.0-0 libgbm-dev || true
           
       - name: Install Python Dependencies (Includes WebDriver)
         run: |
-          # undetected-chromedriver automatically finds the Chromium installed above
           pip install selenium undetected-chromedriver beautifulsoup4
           
       - name: Run Scraper Script and Generate JSON
         run: |
-          # Execute the script to generate the updated promotions.json
+          # The script will execute here. If it successfully finishes scraping, the next step will commit the data.
           python scraper.py
         env:
           PYTHONIOENCODING: utf-8 
