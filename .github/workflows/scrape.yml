@@ -33,21 +33,21 @@ jobs:
           pip install setuptools
           
       # FIX 3 (CRITICAL): Install Google Chrome explicitly and reliably.
-      # This step handles necessary system dependencies internally and guarantees a functional binary.
+      # Requesting a version compatible with the ChromeDriver (141)
       - name: Install Google Chrome (Guaranteed Version)
         uses: browser-actions/setup-chrome@latest
         with:
-          # Use a specific, stable version (120) that is highly compatible with the driver version
-          chrome-version: '120.0.6099.109' 
+          # CRITICAL FIX: Requesting Chrome Version 141 to match the latest driver
+          chrome-version: '141.0.7390.54' 
 
       - name: Install Python Dependencies (Includes WebDriver)
         run: |
-          # undetected-chromedriver will auto-download the driver and find the '/usr/bin/google-chrome' binary set in scraper.py
+          # undetected-chromedriver will auto-download the matching driver for the requested browser
           pip install selenium undetected-chromedriver beautifulsoup4
           
       - name: Run Scraper Script and Generate JSON
         run: |
-          # The scraper.py script must contain the updated initialize_browser() function.
+          # The scraper.py script must contain the updated initialize_browser() function pointing to /usr/bin/google-chrome
           python scraper.py
         env:
           PYTHONIOENCODING: utf-8 
