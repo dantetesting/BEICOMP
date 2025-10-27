@@ -9,7 +9,7 @@ on:
 
 jobs:
   scrape_and_commit:
-    # FIX: Add permissions block to allow the GITHUB_TOKEN to commit changes
+    # FIX 1: Add permissions block to allow the GITHUB_TOKEN to commit changes
     permissions:
       contents: write 
     
@@ -27,24 +27,27 @@ jobs:
         with:
           python-version: '3.x' 
       
-      # FIX 1: Install setuptools before other Python dependencies to fix the 'distutils' error.
+      # FIX 2: Install setuptools before other Python dependencies to fix the 'distutils' error.
       - name: Install Critical Python Setup Tools
         run: |
           pip install setuptools
           
-      - name: Install System Dependencies for Chromium
-        # Using '|| true' to continue past non-critical system install errors (like libasound)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser libnss3 libasound2t64 libatk-bridge2.0-0 libpangocairo-1.0-0 libgbm-dev || true
-          
+      # FIX 3 (CRITICAL): Install Google Chrome explicitly and reliably.
+      # This step handles necessary system dependencies internally and guarantees a functional binary.
+      - name: Install Google Chrome (Guaranteed Version)
+        uses: browser-actions/setup-chrome@latest
+        with:
+          # Use a specific, stable version (120) that is highly compatible with the driver version
+          chrome-version: '120.0.6099.109' 
+
       - name: Install Python Dependencies (Includes WebDriver)
         run: |
+          # undetected-chromedriver will auto-download the driver and find the '/usr/bin/google-chrome' binary set in scraper.py
           pip install selenium undetected-chromedriver beautifulsoup4
           
       - name: Run Scraper Script and Generate JSON
         run: |
-          # The script will execute here. If it successfully finishes scraping, the next step will commit the data.
+          # The scraper.py script must contain the updated initialize_browser() function.
           python scraper.py
         env:
           PYTHONIOENCODING: utf-8 
