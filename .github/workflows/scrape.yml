@@ -9,8 +9,8 @@ on:
 
 jobs:
   scrape_and_commit:
-    # Use a slightly older runner version known to work well with Selenium dependencies
-    runs-on: ubuntu-20.04 
+    # FIX: Switched to the default, high-availability runner (ubuntu-latest)
+    runs-on: ubuntu-latest 
     
     steps:
       - name: Checkout repository code
