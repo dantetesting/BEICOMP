@@ -108,9 +108,9 @@ def initialize_browser():
     # FIX: Add a default argument expected in headless environments 
     options.add_argument("--remote-debugging-port=9222")
 
-    # This attempts to find a compatible driver for the Chrome version at the binary_location
-    # We specify version_main=141 to sync with the latest driver downloaded by UC
-    driver = uc.Chrome(options=options, version_main=141) 
+    # FIX: Removed version_main parameter. uc should auto-detect the required driver 
+    # for the Chrome binary found at options.binary_location.
+    driver = uc.Chrome(options=options) 
     return driver
 
 # ==============================================================================
@@ -181,32 +181,6 @@ def scrape_electronic_city():
         wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "card-promo")))
         time.sleep(3)
         html_content = driver.page_source
-        soup = BeautifulSoup(html_content, 'html.parser')
-        promo_cards = soup.find_all('div', class_='card-promo')
-        print(f"SUKSES! Menemukan {len(promo_cards)} promosi Electronic City.")
-        for card in promo_cards:
-            try:
-                title = card.find('div', class_='ft-sz-13').get_text(strip=True)
-                details = card.find('div', class_='ft-sz-12').get_text(strip=True)
-                promo_url = "https://eci.id" + card.find('a')['href']
-                start_date, end_date = parse_promo_date(details, "Electronic City")
-                
-                product_details = extract_product_details(card, "Electronic City") 
-
-                promo_data = {
-                    "competitor": "Electronic City", 
-                    "title": title, 
-                    "startDate": start_date, 
-                    "endDate": end_date, 
-                    "details": details, 
-                    "url": promo_url,
-                    "product_name": title,
-                    "model_number": "", 
-                    "normal_price": product_details["normal_price"], 
-                    "promo_price": product_details["promo_price"]
-                }
-                promotions.append(promo_data)
-            except Exception: continue
     except Exception as e:
         print(f"Error saat navigasi atau mem-parsing Electronic City: {e}")
     finally:
