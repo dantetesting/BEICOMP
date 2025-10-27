@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) { console.error("JSONBIN Load Error:", error); showNotification('❌ Network error loading manual data.', 'bg-red-500'); }
             
             try {
+                // FIX: Use the URL constructed from repoPath to get the latest committed JSON data
                 const response = await fetch(promotionsJsonUrl); 
                 if(response.ok) { 
                     scrapedPromos = await response.json(); 
@@ -155,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (uniquePromos.length === 0) {
                  promotions = [];
                  await rerenderAll(true);
-                 showNotification('❌ No promotion data loaded from any source.', 'bg-red-500');
+                 // No notification here, let rerenderAll handle empty state messages
                  return;
             }
             
@@ -198,21 +199,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const success = await saveData(updatedPromotions);
             if (success) { showNotification('🗑️ Promotion deleted.', 'bg-blue-500'); document.getElementById('deleteConfirmModal').classList.add('hidden'); document.getElementById('promoModal').classList.add('hidden'); await loadPromotions(); } else { showNotification('❌ Failed to delete.', 'bg-red-500'); }
         };
-        const createTimeline = async () => {
+        const createTimeline = async (activePromosThisMonth) => {
             const wrapper = document.getElementById('timeline-wrapper');
             if (!wrapper) return;
             wrapper.innerHTML = '';
             
-            // Filter promotions BEFORE attempting to create the timeline structure
-            const activePromosThisMonth = promotions.filter(p => {
-                if (!p.startDate || !p.endDate) return false;
-                const promoStart = new Date(p.startDate + 'T00:00:00Z');
-                const promoEnd = new Date(p.endDate + 'T00:00:00Z');
-                const monthStart = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), 1));
-                const monthEnd = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth() + 1, 0, 23, 59, 59));
-                return promoStart <= monthEnd && promoEnd >= monthStart;
-            });
-
             if (activePromosThisMonth.length === 0) {
                  wrapper.innerHTML = '<div class="text-center py-10 text-gray-500">No active promotions to display for this month.</div>';
                  return;
@@ -267,11 +258,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 parent.appendChild(cellsContainer);
             };
             competitors.forEach(compName => {
-                // Now filtering against the already month-active list
+                // Filter based on the already month-active list
                 const competitorPromos = activePromosThisMonth.filter(p => p.competitor === compName);
                 const config = competitorConfig[compName];
                 const competitorHeaderRow = document.createElement('div');
-                competitorHeaderRow.className = 'timeline-full-row timeline-competitor-header';
+                competitorHeaderRow.className = 'timeline-full-row timeline-competitor-header'; 
                 const competitorLabel = document.createElement('div');
                 competitorLabel.className = 'timeline-sticky-label';
                 competitorLabel.textContent = compName;
@@ -279,17 +270,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderGridRow(competitorHeaderRow);
                 wrapper.appendChild(competitorHeaderRow);
                 if (competitorPromos.length === 0) return;
+                
                 const groupedByCategory = {};
                 
                 // Group promotions that are active in the current month/view AND have a drawable duration
                 competitorPromos.forEach(p => {
                     const span = calculatePromotionSpan(p.startDate, p.endDate);
-                    if (span.duration > 0) { // Only count if drawable
+                    if (span.duration > 0) { // Only group/count if drawable
                         if (!groupedByCategory[p.category]) groupedByCategory[p.category] = [];
                         groupedByCategory[p.category].push(p);
                     }
                 });
                 
+                // Only proceed if there are drawable promotions for this competitor
+                if (Object.keys(groupedByCategory).length === 0) return;
+
                 promoCategories.forEach(catName => {
                     const promosForCategory = groupedByCategory[catName] || [];
                     const activeCount = promosForCategory.length; 
@@ -299,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const categoryGroup = document.createElement('div');
                     categoryGroup.className = 'category-group';
                     const categoryHeaderRow = document.createElement('div');
-                    categoryHeaderRow.className = 'timeline-full-row timeline-category-label';
+                    categoryHeaderRow.className = 'timeline-full-row timeline-category-label'; 
                     // Use activeCount for the label display
                     categoryHeaderRow.innerHTML = `<div class="timeline-sticky-label"><span class="icon mr-2"><i class="fa-solid fa-chevron-down"></i></span>${catName} (${activeCount})</div>`;
                     renderGridRow(categoryHeaderRow);
@@ -311,7 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         if (span.duration > 0) { 
                             const promoRow = document.createElement('div');
-                            // Ensure this class is present for CSS styling
                             promoRow.className = 'timeline-full-row timeline-promo-row'; 
                             promoRow.appendChild(document.createElement('div')).className = 'timeline-sticky-label';
                             const promoCells = document.createElement('div');
