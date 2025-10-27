@@ -72,7 +72,6 @@ def extract_product_details(card, competitor):
         "promo_price": ""
     }
     
-    # NOTE: This section adds the requested fields. Actual price scraping requires more specific HTML selectors.
     if competitor == "Hartono":
         title_text = card.find('strong').get_text(strip=True) if card.find('strong') else ""
         details["product_name"] = title_text.split('—')[0].strip()
@@ -93,7 +92,7 @@ def extract_product_details(card, competitor):
     return details
 
 # ==============================================================================
-# BROWSER INITIALIZATION HELPER (FIXED FOR GITHUB ACTIONS)
+# BROWSER INITIALIZATION HELPER (CRITICAL FIX FOR GITHUB ACTIONS)
 # ==============================================================================
 def initialize_browser():
     # CRITICAL FIX: Explicitly set browser executable path for GitHub Actions runner
@@ -102,14 +101,16 @@ def initialize_browser():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     
-    # This path is where browser-actions/setup-chrome places the executable on Ubuntu runners
+    # Force undetected_chromedriver to use the path where the GitHub Action installed Chrome.
+    # This prevents the script from accidentally picking up an incompatible system browser version.
     options.binary_location = '/usr/bin/google-chrome' 
     
     # FIX: Add a default argument expected in headless environments 
     options.add_argument("--remote-debugging-port=9222")
 
-    # The undetected_chromedriver will now use the stable version installed by the GitHub Action
-    driver = uc.Chrome(options=options)
+    # This attempts to find a compatible driver for the Chrome version at the binary_location
+    # We specify version_main=141 to sync with the latest driver downloaded by UC
+    driver = uc.Chrome(options=options, version_main=141) 
     return driver
 
 # ==============================================================================
