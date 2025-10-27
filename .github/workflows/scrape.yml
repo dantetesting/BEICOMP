@@ -1,19 +1,18 @@
 name: Daily Data Scrape and Commit
 
 on:
-  # Allows manual running from the Actions tab
+  # Memungkinkan dijalankan secara manual dari tab Actions
   workflow_dispatch:
   schedule:
-    # Run once a day at midnight UTC
+    # Jadwal berjalan sekali sehari pada tengah malam UTC
     - cron: '0 0 * * *' 
 
 jobs:
   scrape_and_commit:
-    # FIX 1: Add permissions block to allow the GITHUB_TOKEN to commit changes
+    # FIX 1: Menambahkan izin untuk memungkinkan GitHub Actions melakukan commit
     permissions:
       contents: write 
     
-    # Using the latest high-availability runner
     runs-on: ubuntu-latest 
     
     steps:
@@ -27,27 +26,32 @@ jobs:
         with:
           python-version: '3.x' 
       
-      # FIX 2: Install setuptools before other Python dependencies to fix the 'distutils' error.
+      # FIX 2: Menginstal setuptools untuk mengatasi ModuleNotFoundError: No module named 'distutils'
       - name: Install Critical Python Setup Tools
         run: |
           pip install setuptools
           
-      # FIX 3 (CRITICAL): Install Google Chrome explicitly and reliably.
-      # Requesting a version compatible with the ChromeDriver (141)
-      - name: Install Google Chrome (Guaranteed Version)
-        uses: browser-actions/setup-chrome@latest
-        with:
-          # CRITICAL FIX: Requesting Chrome Version 141 to match the latest driver
-          chrome-version: '141.0.7390.54' 
-
+      # FIX 3 (CRITICAL): Menginstal Google Chrome versi stabil terbaru (Implementasi Opsi A)
+      - name: Update/Install Google Chrome Latest
+        run: |
+          # 1. Unduh dan tambahkan GPG key Google
+          sudo mkdir -p /etc/apt/keyrings
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg
+          # 2. Tambahkan repository Chrome ke daftar sumber APT
+          echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+          # 3. Update dan instal/upgrade Chrome versi stabil
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable || sudo apt-get --only-upgrade install -y google-chrome-stable
+          # 4. Tampilkan versi untuk debugging
+          google-chrome --version
+          
       - name: Install Python Dependencies (Includes WebDriver)
         run: |
-          # undetected-chromedriver will auto-download the matching driver for the requested browser
+          # undetected-chromedriver akan auto-download the matching driver for the new browser
           pip install selenium undetected-chromedriver beautifulsoup4
           
       - name: Run Scraper Script and Generate JSON
         run: |
-          # The scraper.py script must contain the updated initialize_browser() function pointing to /usr/bin/google-chrome
           python scraper.py
         env:
           PYTHONIOENCODING: utf-8 
