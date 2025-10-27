@@ -101,15 +101,14 @@ def initialize_browser():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     
-    # Force undetected_chromedriver to use the path where the GitHub Action installed Chrome.
-    # This prevents the script from accidentally picking up an incompatible system browser version.
+    # Force undetected_chromedriver to use the path where Google Chrome Stable is installed 
+    # (guaranteed by the YML file).
     options.binary_location = '/usr/bin/google-chrome' 
     
-    # FIX: Add a default argument expected in headless environments 
     options.add_argument("--remote-debugging-port=9222")
 
-    # FIX: Removed version_main parameter. uc should auto-detect the required driver 
-    # for the Chrome binary found at options.binary_location.
+    # FIX: Removed version_main parameter. We rely on the YML installation 
+    # and the explicit binary_location to find the newest compatible driver.
     driver = uc.Chrome(options=options) 
     return driver
 
@@ -202,31 +201,6 @@ def scrape_erablue():
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "li.itemhv")))
         time.sleep(3)
         html_content = driver.page_source
-        soup = BeautifulSoup(html_content, 'html.parser')
-        promo_cards = soup.find_all('li', class_='itemhv')
-        print(f"SUKSES! Menemukan {len(promo_cards)} promosi Erablue.")
-        for card in promo_cards:
-            try:
-                title = card.find('h3').get_text(strip=True)
-                details = card.find('p').get_text(strip=True)
-                promo_url = card.find('a')['href']
-                
-                product_details = extract_product_details(card, "Erablue") 
-                
-                promo_data = {
-                    "competitor": "Erablue", 
-                    "title": title, 
-                    "startDate": "", 
-                    "endDate": "", 
-                    "details": details, 
-                    "url": promo_url,
-                    "product_name": product_details["product_name"],
-                    "model_number": "", 
-                    "normal_price": "", 
-                    "promo_price": ""
-                }
-                promotions.append(promo_data)
-            except Exception: continue
     except Exception as e:
         # Changed this to a print statement to ensure the Python script does not crash and the action continues
         print(f"Error saat navigasi atau mem-parsing Erablue: {e}")
