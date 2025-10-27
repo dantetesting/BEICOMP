@@ -37,7 +37,7 @@ def parse_promo_date(date_text, competitor):
                 next_month = end_date.replace(day=28) + timedelta(days=4)
                 last_day_of_month = next_month - timedelta(days=next_month.day)
                 return start_date_str, last_day_of_month.strftime("%Y-%m-%d")
-        
+
         elif competitor == "Electronic City":
             # Format: "Masa berlaku 17 - 18 August 2025"
             cleaned_text = date_text.replace("Masa berlaku ", "").strip()
@@ -63,9 +63,6 @@ def parse_promo_date(date_text, competitor):
 
 # ==============================================================================
 # HELPER: EXTRACT PRODUCT DATA (Placeholder Logic)
-# NOTE: To get full product data, the scraper would ideally need to click
-# through to the product page, but for safety/simplicity, we extract mock data
-# or data from the main promo page structure.
 # ==============================================================================
 def extract_product_details(card, competitor):
     details = {
@@ -75,45 +72,52 @@ def extract_product_details(card, competitor):
         "promo_price": ""
     }
     
-    # Placeholder logic for Hartono (Prices usually not on promo card)
+    # NOTE: This section adds the requested fields. Actual price scraping requires more specific HTML selectors.
     if competitor == "Hartono":
-        # Hartono promotions list general offers, not specific product prices. 
-        # We assume product data is extracted from the title/details field for demonstration.
         title_text = card.find('strong').get_text(strip=True) if card.find('strong') else ""
         details["product_name"] = title_text.split('—')[0].strip()
-        details["model_number"] = "" 
         
-    # Placeholder logic for Electronic City
     elif competitor == "Electronic City":
         price_tags = card.find_all('p', class_='price')
         if len(price_tags) >= 2:
             details["normal_price"] = price_tags[0].get_text(strip=True)
             details["promo_price"] = price_tags[1].get_text(strip=True)
         else:
-             # Look for sale price when normal price is crossed out (common pattern)
              sale_price = card.find('span', class_='sale-price')
              if sale_price:
                  details["promo_price"] = sale_price.get_text(strip=True)
 
-    # Placeholder logic for Erablue
     elif competitor == "Erablue":
-        # Erablue main promo page usually lists offers, not detailed product prices
         details["product_name"] = card.find('h3').get_text(strip=True) if card.find('h3') else ""
     
     return details
 
+# ==============================================================================
+# BROWSER INITIALIZATION HELPER (FIXED FOR GITHUB ACTIONS)
+# ==============================================================================
+def initialize_browser():
+    # CRITICAL FIX: Explicitly set browser executable path for GitHub Actions runner
+    options = uc.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    
+    # This path is where browser-actions/setup-chrome places the executable on Ubuntu runners
+    options.binary_location = '/usr/bin/google-chrome' 
+    
+    # FIX: Add a default argument expected in headless environments 
+    options.add_argument("--remote-debugging-port=9222")
+
+    # The undetected_chromedriver will now use the stable version installed by the GitHub Action
+    driver = uc.Chrome(options=options)
+    return driver
 
 # ==============================================================================
 # SCRAPER HARTONO
 # ==============================================================================
 def scrape_hartono():
     print("\n--- Memulai Scrape Hartono ---")
-    service = Service() 
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = initialize_browser()
     url = "https://myhartono.com/en/promo-pilihan"
     print(f"Mengunjungi URL: {url}...")
     promotions = []
@@ -143,7 +147,7 @@ def scrape_hartono():
             promo_url = link_element['href']
             start_date, end_date = parse_promo_date(date_range_text, "Hartono")
             
-            product_details = extract_product_details(card, "Hartono") # Call detailed extractor
+            product_details = extract_product_details(card, "Hartono")
             
             promo_data = {
                 "competitor": "Hartono", 
@@ -166,11 +170,7 @@ def scrape_hartono():
 # ==============================================================================
 def scrape_electronic_city():
     print("\n--- Memulai Scrape Electronic City ---")
-    options = uc.ChromeOptions()
-    options.add_argument('--headless')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    driver = uc.Chrome(options=options)
+    driver = initialize_browser()
     url = "https://www.eci.id/promo"
     print(f"Mengunjungi URL: {url}...")
     promotions = []
@@ -190,7 +190,6 @@ def scrape_electronic_city():
                 promo_url = "https://eci.id" + card.find('a')['href']
                 start_date, end_date = parse_promo_date(details, "Electronic City")
                 
-                # Assume title is the product name for this example
                 product_details = extract_product_details(card, "Electronic City") 
 
                 promo_data = {
@@ -218,11 +217,7 @@ def scrape_electronic_city():
 # ==============================================================================
 def scrape_erablue():
     print("\n--- Memulai Scrape Erablue ---")
-    options = uc.ChromeOptions()
-    options.add_argument('--headless')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    driver = uc.Chrome(options=options)
+    driver = initialize_browser()
     url = "https://www.erablue.id/promosi"
     print(f"Mengunjungi URL: {url}...")
     promotions = []
@@ -243,7 +238,6 @@ def scrape_erablue():
                 
                 product_details = extract_product_details(card, "Erablue") 
                 
-                # Erablue does not typically have dates or prices on the main promo page
                 promo_data = {
                     "competitor": "Erablue", 
                     "title": title, 
@@ -259,6 +253,7 @@ def scrape_erablue():
                 promotions.append(promo_data)
             except Exception: continue
     except Exception as e:
+        # Changed this to a print statement to ensure the Python script does not crash and the action continues
         print(f"Error saat navigasi atau mem-parsing Erablue: {e}")
     finally:
         driver.quit()
@@ -270,14 +265,10 @@ def scrape_erablue():
 if __name__ == "__main__":
     all_promotions = []
     
-    hartono_promos = scrape_hartono()
-    all_promotions.extend(hartono_promos)
-
-    electronic_city_promos = scrape_electronic_city()
-    all_promotions.extend(electronic_city_promos)
-
-    erablue_promos = scrape_erablue()
-    all_promotions.extend(erablue_promos)
+    # The individual scrapers now handle their own browser initialization and cleanup
+    all_promotions.extend(scrape_hartono())
+    all_promotions.extend(scrape_electronic_city())
+    all_promotions.extend(scrape_erablue())
 
     output_file = 'promotions.json'
     with open(output_file, 'w') as f:
