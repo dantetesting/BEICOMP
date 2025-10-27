@@ -22,12 +22,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x' 
-
+      
+      # FIX 1: Install setuptools before other Python dependencies to fix the 'distutils' error.
+      - name: Install Critical Python Setup Tools
+        run: |
+          pip install setuptools
+          
       - name: Install System Dependencies for Chromium
-        # FIX: Added '-y --fix-missing' and changed the install command to continue on errors
+        # Using '|| true' to continue past non-critical system install errors (like libasound)
         run: |
           sudo apt-get update
-          # Use '-y' for non-interactive install and '|| true' to ignore non-critical package errors
           sudo apt-get install -y chromium-browser libnss3 libasound2t64 libatk-bridge2.0-0 libpangocairo-1.0-0 libgbm-dev || true
           
       - name: Install Python Dependencies (Includes WebDriver)
