@@ -9,17 +9,13 @@ on:
 
 jobs:
   scrape_and_commit:
-    runs-on: ubuntu-latest
-    
-    # 1. Setup Service Containers: Ensure Chrome is available for undetected-chromedriver
-    # Although undetected-chromedriver handles driver download, we need the environment for Chrome to run.
-    # This step is often the key difference between local and cloud scraping success.
+    # Using the latest high-availability runner
+    runs-on: ubuntu-latest 
     
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
         with:
-          # Use the default token for permissions to push back to the repo
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
@@ -27,20 +23,19 @@ jobs:
         with:
           python-version: '3.x' 
 
-      # FIX: Install all necessary system dependencies for running Chrome in headless mode
-      - name: Install System Dependencies for Headless Chrome
+      - name: Install System Dependencies for Chromium
+        # FIX: Replaced 'libasound2' with the correct package for the latest Ubuntu version (libasound2t64)
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-browser libnss3 libasound2 libatk-bridge2.0-0 libpangocairo-1.0-0 libgbm-dev
-
-      - name: Install Python Dependencies
+          sudo apt-get install -y chromium-browser libnss3 libasound2t64 libatk-bridge2.0-0 libpangocairo-1.0-0 libgbm-dev
+          
+      - name: Install Python Dependencies (Includes WebDriver)
         run: |
-          # Install Python dependencies including undetected-chromedriver
           pip install selenium undetected-chromedriver beautifulsoup4
           
       - name: Run Scraper Script and Generate JSON
         run: |
-          # Execute the script to generate the updated promotions.json
+          # The script will execute here. If it successfully finishes scraping, the next step will commit the data.
           python scraper.py
         env:
           PYTHONIOENCODING: utf-8 
