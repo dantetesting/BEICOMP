@@ -1,42 +1,6 @@
 [
     {
         "competitor": "Hartono",
-        "title": "Kompor Gas Rinnai Extra Diskon 10%!!",
-        "startDate": "2025-12-03",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 3, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10849",
-        "product_name": "Kompor Gas Rinnai Extra Diskon 10%!!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "Sanken Discount up to 30%",
-        "startDate": "2025-12-01",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 1, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10744",
-        "product_name": "Sanken Discount up to 30%",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "Miyako Home Appliances Diskon 10%",
-        "startDate": "2025-12-03",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 3, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10743",
-        "product_name": "Miyako Home Appliances Diskon 10%",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
         "title": "Kredivo Belanja Sekarang, Bayar Nanti #Sefleksibelitu",
         "startDate": "2026-01-01",
         "endDate": "2026-01-31",
@@ -97,12 +61,12 @@
     },
     {
         "competitor": "Hartono",
-        "title": "YEAR END SALE - Philips Blender Diskon 15%",
-        "startDate": "2025-11-27",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Nov 27, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=11708",
-        "product_name": "YEAR END SALE - Philips Blender Diskon 15%",
+        "title": "Philips New Year Sale!",
+        "startDate": "2026-01-06",
+        "endDate": "2026-01-31",
+        "details": "Periode Promo: Jan 6, 2026 - Jan 31, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=9286",
+        "product_name": "Philips New Year Sale!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -115,18 +79,6 @@
         "details": "Periode Promo: Jan 5, 2026 - Jan 31, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10229",
         "product_name": "AQUA New Year Hot Item!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "BOSCH Front Loading 10 kg WGG454E0ID Free Vacuum",
-        "startDate": "2025-12-17",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 17, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=products.view&product_id=126814",
-        "product_name": "BOSCH Front Loading 10 kg WGG454E0ID Free Vacuum",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -181,18 +133,6 @@
     },
     {
         "competitor": "Hartono",
-        "title": "Panasonic Spesial Diskon up to 20%",
-        "startDate": "2025-12-19",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 19, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=9600",
-        "product_name": "Panasonic Spesial Diskon up to 20%",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
         "title": "Ariston Water Heater Gratis Pemasangan",
         "startDate": "2026-01-01",
         "endDate": "2026-03-31",
@@ -211,30 +151,6 @@
         "details": "Periode Promo: Jan 6, 2026 - Jan 31, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7975",
         "product_name": "Newmark New Year – Belanja Hemat, Cashback Maksimal!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "SHARP Rice Cooker Special Price!",
-        "startDate": "2025-12-08",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 8, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=products.view&product_id=139060",
-        "product_name": "SHARP Rice Cooker Special Price!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "Panasonic Holiday Sale Disc. 10%",
-        "startDate": "2025-12-22",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 22, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10249",
-        "product_name": "Panasonic Holiday Sale Disc. 10%",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -266,7 +182,7 @@
     {
         "competitor": "Hartono",
         "title": "MANDIRI",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8172",
@@ -278,7 +194,7 @@
     {
         "competitor": "Hartono",
         "title": "Kredivo",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9797",
@@ -290,7 +206,7 @@
     {
         "competitor": "Hartono",
         "title": "DBS",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8273",
@@ -302,7 +218,7 @@
     {
         "competitor": "Hartono",
         "title": "Indodana PayLater",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8167",
@@ -314,7 +230,7 @@
     {
         "competitor": "Hartono",
         "title": "Maybank",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10824",
@@ -326,7 +242,7 @@
     {
         "competitor": "Hartono",
         "title": "PaninBank",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10468",
@@ -338,7 +254,7 @@
     {
         "competitor": "Hartono",
         "title": "CIMB NIAGA",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8165",
@@ -350,7 +266,7 @@
     {
         "competitor": "Hartono",
         "title": "Permata",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8162",
@@ -362,7 +278,7 @@
     {
         "competitor": "Hartono",
         "title": "MAYAPADA",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10561",
@@ -374,7 +290,7 @@
     {
         "competitor": "Hartono",
         "title": "Jenius Credit Card",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9554",
@@ -386,7 +302,7 @@
     {
         "competitor": "Hartono",
         "title": "BNI",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7860",
@@ -398,7 +314,7 @@
     {
         "competitor": "Hartono",
         "title": "BCA",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9601",
@@ -410,7 +326,7 @@
     {
         "competitor": "Hartono",
         "title": "Danamon",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10513",
@@ -422,7 +338,7 @@
     {
         "competitor": "Hartono",
         "title": "OCBC",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10146",
@@ -434,7 +350,7 @@
     {
         "competitor": "Hartono",
         "title": "BRI",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9756",
@@ -446,7 +362,7 @@
     {
         "competitor": "Hartono",
         "title": "UOB",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10144",
@@ -458,47 +374,11 @@
     {
         "competitor": "Hartono",
         "title": "HSBC",
-        "startDate": "2026-01-07",
+        "startDate": "2026-01-08",
         "endDate": "2026-01-31",
         "details": "Periode Promo: Hingga Januari 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7810",
         "product_name": "HSBC",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "Kompor Gas Rinnai Extra Diskon 10%!!",
-        "startDate": "2025-12-03",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 3, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10849",
-        "product_name": "Kompor Gas Rinnai Extra Diskon 10%!!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "Sanken Discount up to 30%",
-        "startDate": "2025-12-01",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 1, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10744",
-        "product_name": "Sanken Discount up to 30%",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "Miyako Home Appliances Diskon 10%",
-        "startDate": "2025-12-03",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 3, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10743",
-        "product_name": "Miyako Home Appliances Diskon 10%",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -541,12 +421,12 @@
     },
     {
         "competitor": "Hartono",
-        "title": "YEAR END SALE - Philips Blender Diskon 15%",
-        "startDate": "2025-11-27",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Nov 27, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=11708",
-        "product_name": "YEAR END SALE - Philips Blender Diskon 15%",
+        "title": "Philips New Year Sale!",
+        "startDate": "2026-01-06",
+        "endDate": "2026-01-31",
+        "details": "Periode Promo: Jan 6, 2026 - Jan 31, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=9286",
+        "product_name": "Philips New Year Sale!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -559,18 +439,6 @@
         "details": "Periode Promo: Jan 5, 2026 - Jan 31, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10229",
         "product_name": "AQUA New Year Hot Item!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "BOSCH Front Loading 10 kg WGG454E0ID Free Vacuum",
-        "startDate": "2025-12-17",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 17, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=products.view&product_id=126814",
-        "product_name": "BOSCH Front Loading 10 kg WGG454E0ID Free Vacuum",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -601,18 +469,6 @@
     },
     {
         "competitor": "Hartono",
-        "title": "Panasonic Spesial Diskon up to 20%",
-        "startDate": "2025-12-19",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 19, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=9600",
-        "product_name": "Panasonic Spesial Diskon up to 20%",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
         "title": "Ariston Water Heater Gratis Pemasangan",
         "startDate": "2026-01-01",
         "endDate": "2026-03-31",
@@ -631,30 +487,6 @@
         "details": "Periode Promo: Jan 6, 2026 - Jan 31, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7975",
         "product_name": "Newmark New Year – Belanja Hemat, Cashback Maksimal!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "SHARP Rice Cooker Special Price!",
-        "startDate": "2025-12-08",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 8, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=products.view&product_id=139060",
-        "product_name": "SHARP Rice Cooker Special Price!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "Panasonic Holiday Sale Disc. 10%",
-        "startDate": "2025-12-22",
-        "endDate": "2026-01-07",
-        "details": "Periode Promo: Dec 22, 2025 - Jan 7, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10249",
-        "product_name": "Panasonic Holiday Sale Disc. 10%",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
