@@ -61,18 +61,6 @@
     },
     {
         "competitor": "Hartono",
-        "title": "⚡︎ Electrolux Flash Sale ⚡︎",
-        "startDate": "2026-04-07",
-        "endDate": "2026-04-16",
-        "details": "Periode Promo: Apr 7, 2026 - Apr 16, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10840",
-        "product_name": "⚡︎ Electrolux Flash Sale ⚡︎",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
         "title": "Kredivo Belanja Sekarang, Bayar Nanti #Sefleksibelitu",
         "startDate": "2026-04-01",
         "endDate": "2026-04-30",
@@ -151,6 +139,18 @@
         "details": "Periode Promo: Apr 1, 2026 - May 4, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=11641",
         "product_name": "Philips Home Appliances Diskon up to 35%!!",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "Harga Spesial iPhone 15 ⚡ Stok Terbatas!",
+        "startDate": "2026-04-16",
+        "endDate": "2026-04-30",
+        "details": "Periode Promo: Apr 16, 2026 - Apr 30, 2026",
+        "url": "https://myhartono.com/?dispatch=products.view&product_id=126283",
+        "product_name": "Harga Spesial iPhone 15 ⚡ Stok Terbatas!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -265,6 +265,18 @@
     },
     {
         "competitor": "Hartono",
+        "title": "CLEARANCE SALE! Vacuum Cleaner Panasonic",
+        "startDate": "2026-04-14",
+        "endDate": "2026-04-30",
+        "details": "Periode Promo: Apr 14, 2026 - Apr 30, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=11689",
+        "product_name": "CLEARANCE SALE! Vacuum Cleaner Panasonic",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
         "title": "Trade In AC & TV Sekarang Lebih Mudah & Praktis",
         "startDate": "2026-04-01",
         "endDate": "2026-04-30",
@@ -278,7 +290,7 @@
     {
         "competitor": "Hartono",
         "title": "MANDIRI",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8172",
@@ -290,7 +302,7 @@
     {
         "competitor": "Hartono",
         "title": "UOB",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10144",
@@ -302,7 +314,7 @@
     {
         "competitor": "Hartono",
         "title": "Kredivo",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9797",
@@ -314,7 +326,7 @@
     {
         "competitor": "Hartono",
         "title": "Maybank",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10824",
@@ -326,7 +338,7 @@
     {
         "competitor": "Hartono",
         "title": "DBS",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8273",
@@ -338,7 +350,7 @@
     {
         "competitor": "Hartono",
         "title": "Indodana PayLater",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8167",
@@ -362,7 +374,7 @@
     {
         "competitor": "Hartono",
         "title": "PaninBank",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10468",
@@ -374,7 +386,7 @@
     {
         "competitor": "Hartono",
         "title": "CIMB NIAGA",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8165",
@@ -386,7 +398,7 @@
     {
         "competitor": "Hartono",
         "title": "MAYAPADA",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10561",
@@ -398,7 +410,7 @@
     {
         "competitor": "Hartono",
         "title": "Jenius Credit Card",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9554",
@@ -410,7 +422,7 @@
     {
         "competitor": "Hartono",
         "title": "BNI",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7860",
@@ -422,7 +434,7 @@
     {
         "competitor": "Hartono",
         "title": "BCA",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9601",
@@ -434,7 +446,7 @@
     {
         "competitor": "Hartono",
         "title": "Danamon",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10513",
@@ -446,7 +458,7 @@
     {
         "competitor": "Hartono",
         "title": "OCBC",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10146",
@@ -458,7 +470,7 @@
     {
         "competitor": "Hartono",
         "title": "BRI",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9756",
@@ -470,7 +482,7 @@
     {
         "competitor": "Hartono",
         "title": "HSBC",
-        "startDate": "2026-04-16",
+        "startDate": "2026-04-17",
         "endDate": "2026-04-30",
         "details": "Periode Promo: Hingga April 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7810",
@@ -523,18 +535,6 @@
         "details": "Periode Promo: Apr 3, 2026 - Apr 30, 2026",
         "url": "https://myhartono.com/?dispatch=products.view&product_id=128310",
         "product_name": "Special Price LG 50 inch NanoCell AI",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "⚡︎ Electrolux Flash Sale ⚡︎",
-        "startDate": "2026-04-07",
-        "endDate": "2026-04-16",
-        "details": "Periode Promo: Apr 7, 2026 - Apr 16, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10840",
-        "product_name": "⚡︎ Electrolux Flash Sale ⚡︎",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -595,6 +595,18 @@
         "details": "Periode Promo: Apr 1, 2026 - May 4, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=11641",
         "product_name": "Philips Home Appliances Diskon up to 35%!!",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "Harga Spesial iPhone 15 ⚡ Stok Terbatas!",
+        "startDate": "2026-04-16",
+        "endDate": "2026-04-30",
+        "details": "Periode Promo: Apr 16, 2026 - Apr 30, 2026",
+        "url": "https://myhartono.com/?dispatch=products.view&product_id=126283",
+        "product_name": "Harga Spesial iPhone 15 ⚡ Stok Terbatas!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -679,6 +691,18 @@
         "details": "Periode Promo: Apr 1, 2026 - Jun 30, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=576",
         "product_name": "Super Midea Season",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "CLEARANCE SALE! Vacuum Cleaner Panasonic",
+        "startDate": "2026-04-14",
+        "endDate": "2026-04-30",
+        "details": "Periode Promo: Apr 14, 2026 - Apr 30, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=11689",
+        "product_name": "CLEARANCE SALE! Vacuum Cleaner Panasonic",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
