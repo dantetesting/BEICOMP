@@ -1,12 +1,24 @@
 [
     {
         "competitor": "Hartono",
-        "title": "Sanken Home Appliances Diskon s.d 20%",
-        "startDate": "2026-07-01",
-        "endDate": "2026-08-03",
-        "details": "Periode Promo: Jul 1, 2026 - Aug 3, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10744",
-        "product_name": "Sanken Home Appliances Diskon s.d 20%",
+        "title": "Instant Damage Replacement",
+        "startDate": "2026-08-01",
+        "endDate": "2026-08-31",
+        "details": "Periode Promo: Aug 1, 2026 - Aug 31, 2026",
+        "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=1484",
+        "product_name": "Instant Damage Replacement",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "Beli Elektronik Online, Ekstra Diskon up to 1 Juta!",
+        "startDate": "2026-08-03",
+        "endDate": "2026-08-31",
+        "details": "Periode Promo: Aug 3, 2026 - Aug 31, 2026",
+        "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=1481",
+        "product_name": "Beli Elektronik Online, Ekstra Diskon up to 1 Juta!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -19,6 +31,18 @@
         "details": "Periode Promo: Aug 1, 2026 - Aug 31, 2026",
         "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=1403",
         "product_name": "Kredivo Belanja Sekarang, Bayar Nanti #Sefleksibelitu",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "Belanja Kilat, Ambil Cepat – Click & Collect!",
+        "startDate": "2026-08-01",
+        "endDate": "2026-08-31",
+        "details": "Periode Promo: Aug 1, 2026 - Aug 31, 2026",
+        "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=1373",
+        "product_name": "Belanja Kilat, Ambil Cepat – Click & Collect!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -133,6 +157,18 @@
     },
     {
         "competitor": "Hartono",
+        "title": "Beli Sekarang, Besok Dikirim!",
+        "startDate": "2026-08-01",
+        "endDate": "2026-08-31",
+        "details": "Periode Promo: Aug 1, 2026 - Aug 31, 2026",
+        "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=678",
+        "product_name": "Beli Sekarang, Besok Dikirim!",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
         "title": "Samsung Upgrade Smart Living: FREE GIFT & ULTRA VOUCHER 500k",
         "startDate": "2026-07-15",
         "endDate": "2026-09-14",
@@ -170,7 +206,7 @@
     {
         "competitor": "Hartono",
         "title": "Indodana PayLater",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8167",
@@ -182,7 +218,7 @@
     {
         "competitor": "Hartono",
         "title": "DBS",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8273",
@@ -194,7 +230,7 @@
     {
         "competitor": "Hartono",
         "title": "UOB",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10144",
@@ -206,7 +242,7 @@
     {
         "competitor": "Hartono",
         "title": "Kredivo",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9797",
@@ -218,7 +254,7 @@
     {
         "competitor": "Hartono",
         "title": "MANDIRI",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8172",
@@ -230,7 +266,7 @@
     {
         "competitor": "Hartono",
         "title": "Maybank",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10824",
@@ -242,7 +278,7 @@
     {
         "competitor": "Hartono",
         "title": "PaninBank",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10468",
@@ -254,7 +290,7 @@
     {
         "competitor": "Hartono",
         "title": "MAYAPADA",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10561",
@@ -266,7 +302,7 @@
     {
         "competitor": "Hartono",
         "title": "Jenius Credit Card",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9554",
@@ -278,7 +314,7 @@
     {
         "competitor": "Hartono",
         "title": "BNI",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7860",
@@ -290,7 +326,7 @@
     {
         "competitor": "Hartono",
         "title": "BCA",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9601",
@@ -302,7 +338,7 @@
     {
         "competitor": "Hartono",
         "title": "Danamon",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10513",
@@ -314,7 +350,7 @@
     {
         "competitor": "Hartono",
         "title": "OCBC",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10146",
@@ -326,7 +362,7 @@
     {
         "competitor": "Hartono",
         "title": "BRI",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9756",
@@ -338,23 +374,11 @@
     {
         "competitor": "Hartono",
         "title": "HSBC",
-        "startDate": "2026-08-03",
+        "startDate": "2026-08-04",
         "endDate": "2026-08-31",
         "details": "Periode Promo: Hingga Agustus 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7810",
         "product_name": "HSBC",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "Sanken Home Appliances Diskon s.d 20%",
-        "startDate": "2026-07-01",
-        "endDate": "2026-08-03",
-        "details": "Periode Promo: Jul 1, 2026 - Aug 3, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=10744",
-        "product_name": "Sanken Home Appliances Diskon s.d 20%",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
