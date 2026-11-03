@@ -1,12 +1,36 @@
 [
     {
         "competitor": "Hartono",
+        "title": "Instant Damage Replacement",
+        "startDate": "2026-11-01",
+        "endDate": "2026-11-30",
+        "details": "Periode Promo: Nov 1, 2026 - Nov 30, 2026",
+        "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=1484",
+        "product_name": "Instant Damage Replacement",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
         "title": "Tefal Home Appliances Special Price",
         "startDate": "2026-09-30",
         "endDate": "2027-01-31",
         "details": "Periode Promo: Sep 30, 2026 - Jan 31, 2027",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=12167",
         "product_name": "Tefal Home Appliances Special Price",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "Beli Elektronik Online, Ekstra Diskon up to 1 Juta!",
+        "startDate": "2026-11-03",
+        "endDate": "2026-11-30",
+        "details": "Periode Promo: Nov 3, 2026 - Nov 30, 2026",
+        "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=1481",
+        "product_name": "Beli Elektronik Online, Ekstra Diskon up to 1 Juta!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -73,18 +97,6 @@
     },
     {
         "competitor": "Hartono",
-        "title": "Beli Pompa Air Sanyo Dapat hadiah Gratis!!",
-        "startDate": "2026-10-02",
-        "endDate": "2026-11-02",
-        "details": "Periode Promo: Oct 2, 2026 - Nov 2, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=9355",
-        "product_name": "Beli Pompa Air Sanyo Dapat hadiah Gratis!!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
         "title": "Samsung BIG Screen Festival ~ hadiah S26 Ultra | Soundbar Q Series | Galaxy Watch | Buds4 pro",
         "startDate": "2026-10-07",
         "endDate": "2027-01-03",
@@ -103,6 +115,18 @@
         "details": "Periode Promo: Oct 6, 2026 - Nov 8, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9286",
         "product_name": "Philips Special Price Discount Up To 20%",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "GRATIS Dreame Hair Mini min belanja 8jt!",
+        "startDate": "2026-11-02",
+        "endDate": "2026-11-30",
+        "details": "Periode Promo: Nov 2, 2026 - Nov 30, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=12455",
+        "product_name": "GRATIS Dreame Hair Mini min belanja 8jt!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -145,6 +169,18 @@
     },
     {
         "competitor": "Hartono",
+        "title": "Ariston Water Heater Gratis Pemasangan",
+        "startDate": "2026-10-01",
+        "endDate": "2026-12-31",
+        "details": "Periode Promo: Oct 1, 2026 - Dec 31, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=9641",
+        "product_name": "Ariston Water Heater Gratis Pemasangan",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
         "title": "Beli produk Panasonic pilihan GRATIS Setrika!",
         "startDate": "2026-10-13",
         "endDate": "2026-11-30",
@@ -181,24 +217,24 @@
     },
     {
         "competitor": "Hartono",
-        "title": "Beli Kompor Teka - Line GRATIS Cooker Hood",
-        "startDate": "2026-09-25",
-        "endDate": "2026-11-02",
-        "details": "Periode Promo: Sep 25, 2026 - Nov 2, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=11721",
-        "product_name": "Beli Kompor Teka - Line GRATIS Cooker Hood",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
         "title": "Belanja Online Makin Hemat dengan Diskon Ongkir!",
         "startDate": "2026-11-01",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Nov 1, 2026 - Nov 30, 2026",
         "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=683",
         "product_name": "Belanja Online Makin Hemat dengan Diskon Ongkir!",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "Beli Sekarang, Besok Dikirim!",
+        "startDate": "2026-11-01",
+        "endDate": "2026-11-30",
+        "details": "Periode Promo: Nov 1, 2026 - Nov 30, 2026",
+        "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=678",
+        "product_name": "Beli Sekarang, Besok Dikirim!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -229,12 +265,24 @@
     },
     {
         "competitor": "Hartono",
-        "title": "Beli Oven GRATIS Vacuum Cleaner!",
-        "startDate": "2026-09-25",
-        "endDate": "2026-11-02",
-        "details": "Periode Promo: Sep 25, 2026 - Nov 2, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=8265",
-        "product_name": "Beli Oven GRATIS Vacuum Cleaner!",
+        "title": "Samsung Upgrade Smart Living: FREE GIFT & ULTRA VOUCHER 500k",
+        "startDate": "2026-10-15",
+        "endDate": "2026-11-14",
+        "details": "Periode Promo: Oct 15, 2026 - Nov 14, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=11442",
+        "product_name": "Samsung Upgrade Smart Living: FREE GIFT & ULTRA VOUCHER 500k",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "Trade In AC & TV Sekarang Lebih Mudah & Praktis",
+        "startDate": "2026-11-01",
+        "endDate": "2026-11-30",
+        "details": "Periode Promo: Nov 1, 2026 - Nov 30, 2026",
+        "url": "https://myhartono.com/?dispatch=pages.mobile_view&page_id=243",
+        "product_name": "Trade In AC & TV Sekarang Lebih Mudah & Praktis",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -242,7 +290,7 @@
     {
         "competitor": "Hartono",
         "title": "DBS",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8273",
@@ -254,7 +302,7 @@
     {
         "competitor": "Hartono",
         "title": "UOB",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10144",
@@ -266,7 +314,7 @@
     {
         "competitor": "Hartono",
         "title": "Indodana PayLater",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8167",
@@ -278,7 +326,7 @@
     {
         "competitor": "Hartono",
         "title": "MANDIRI",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=8172",
@@ -290,7 +338,7 @@
     {
         "competitor": "Hartono",
         "title": "Maybank",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10824",
@@ -326,7 +374,7 @@
     {
         "competitor": "Hartono",
         "title": "PaninBank",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10468",
@@ -338,7 +386,7 @@
     {
         "competitor": "Hartono",
         "title": "MAYAPADA",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10561",
@@ -350,7 +398,7 @@
     {
         "competitor": "Hartono",
         "title": "Jenius Credit Card",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9554",
@@ -362,7 +410,7 @@
     {
         "competitor": "Hartono",
         "title": "BNI",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7860",
@@ -374,7 +422,7 @@
     {
         "competitor": "Hartono",
         "title": "BCA",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9601",
@@ -386,7 +434,7 @@
     {
         "competitor": "Hartono",
         "title": "Danamon",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10513",
@@ -398,7 +446,7 @@
     {
         "competitor": "Hartono",
         "title": "OCBC",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=10146",
@@ -410,7 +458,7 @@
     {
         "competitor": "Hartono",
         "title": "BRI",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9756",
@@ -422,7 +470,7 @@
     {
         "competitor": "Hartono",
         "title": "HSBC",
-        "startDate": "2026-11-02",
+        "startDate": "2026-11-03",
         "endDate": "2026-11-30",
         "details": "Periode Promo: Hingga November 2026Berlaku Setiap Hari",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=7810",
@@ -493,18 +541,6 @@
     },
     {
         "competitor": "Hartono",
-        "title": "Beli Pompa Air Sanyo Dapat hadiah Gratis!!",
-        "startDate": "2026-10-02",
-        "endDate": "2026-11-02",
-        "details": "Periode Promo: Oct 2, 2026 - Nov 2, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=9355",
-        "product_name": "Beli Pompa Air Sanyo Dapat hadiah Gratis!!",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
         "title": "Samsung BIG Screen Festival ~ hadiah S26 Ultra | Soundbar Q Series | Galaxy Watch | Buds4 pro",
         "startDate": "2026-10-07",
         "endDate": "2027-01-03",
@@ -523,6 +559,18 @@
         "details": "Periode Promo: Oct 6, 2026 - Nov 8, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=9286",
         "product_name": "Philips Special Price Discount Up To 20%",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
+        "title": "GRATIS Dreame Hair Mini min belanja 8jt!",
+        "startDate": "2026-11-02",
+        "endDate": "2026-11-30",
+        "details": "Periode Promo: Nov 2, 2026 - Nov 30, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=12455",
+        "product_name": "GRATIS Dreame Hair Mini min belanja 8jt!",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -565,6 +613,18 @@
     },
     {
         "competitor": "Hartono",
+        "title": "Ariston Water Heater Gratis Pemasangan",
+        "startDate": "2026-10-01",
+        "endDate": "2026-12-31",
+        "details": "Periode Promo: Oct 1, 2026 - Dec 31, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=9641",
+        "product_name": "Ariston Water Heater Gratis Pemasangan",
+        "model_number": "",
+        "normal_price": "",
+        "promo_price": ""
+    },
+    {
+        "competitor": "Hartono",
         "title": "Beli produk Panasonic pilihan GRATIS Setrika!",
         "startDate": "2026-10-13",
         "endDate": "2026-11-30",
@@ -583,18 +643,6 @@
         "details": "Periode Promo: Oct 20, 2026 - Nov 30, 2026",
         "url": "https://myhartono.com/?dispatch=categories.view&category_id=12429",
         "product_name": "Philips Personal Care Clearance Sale - DISKON 50%",
-        "model_number": "",
-        "normal_price": "",
-        "promo_price": ""
-    },
-    {
-        "competitor": "Hartono",
-        "title": "Beli Kompor Teka - Line GRATIS Cooker Hood",
-        "startDate": "2026-09-25",
-        "endDate": "2026-11-02",
-        "details": "Periode Promo: Sep 25, 2026 - Nov 2, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=11721",
-        "product_name": "Beli Kompor Teka - Line GRATIS Cooker Hood",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
@@ -625,12 +673,12 @@
     },
     {
         "competitor": "Hartono",
-        "title": "Beli Oven GRATIS Vacuum Cleaner!",
-        "startDate": "2026-09-25",
-        "endDate": "2026-11-02",
-        "details": "Periode Promo: Sep 25, 2026 - Nov 2, 2026",
-        "url": "https://myhartono.com/?dispatch=categories.view&category_id=8265",
-        "product_name": "Beli Oven GRATIS Vacuum Cleaner!",
+        "title": "Samsung Upgrade Smart Living: FREE GIFT & ULTRA VOUCHER 500k",
+        "startDate": "2026-10-15",
+        "endDate": "2026-11-14",
+        "details": "Periode Promo: Oct 15, 2026 - Nov 14, 2026",
+        "url": "https://myhartono.com/?dispatch=categories.view&category_id=11442",
+        "product_name": "Samsung Upgrade Smart Living: FREE GIFT & ULTRA VOUCHER 500k",
         "model_number": "",
         "normal_price": "",
         "promo_price": ""
